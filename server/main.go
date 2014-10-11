@@ -2,8 +2,11 @@ package main
 
 import (
 	"github.com/codegangsta/cli"
+	"github.com/savaki/redisurl"
+	"io"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
@@ -20,5 +23,40 @@ func main() {
 
 func Run(c *cli.Context) {
 	addr := ":" + c.String("port")
-	http.ListenAndServe(addr, http.FileServer(http.Dir(".")))
+
+	http.HandleFunc("/check/redis", CheckRedis)
+	http.Handle("/", http.FileServer(http.Dir(".")))
+	http.ListenAndServe(addr, nil)
+}
+
+func Fail(w http.ResponseWriter, err error) {
+	w.WriteHeader(500)
+	w.Write([]byte(err.Error()))
+}
+
+func CheckRedis(w http.ResponseWriter, req *http.Request) {
+	c, err := redisurl.ConnectToURL(os.Getenv("REDISCLOUD_URL"))
+	if err != nil {
+		Fail(w, err)
+		return
+	}
+	defer c.Close()
+
+	// retrieve the previous value
+	key := "redis-check"
+	v, err := c.Do("GET", key)
+	if err != nil {
+		Fail(w, err)
+		return
+	}
+
+	// sets the new value
+	_, err = c.Do("SET", key, time.Now().String())
+	if err != nil {
+		Fail(w, err)
+		return
+	}
+
+	w.WriteHeader(200)
+	io.WriteString(w, string(v.([]byte)))
 }
