@@ -22,6 +22,8 @@
                        "show-me-how"
                        "talk-to-expert"]))
 
+(def requests-state (atom []))
+
 ; ------------------------------------------------------------------------
 
 ; hard coding logic here where a hero page is only allowed to be in two
@@ -85,26 +87,60 @@
 
 ; ------------------------------------------------------------------------
 
-(defn home-feed-view []
-  [:div "I'm the feed on the home page"])
+(defn home-feed-first-time []
+  [:div.newbie [:h1 "Worker Smarter"]
+   [:h2 "Get Things Done Securely, Reliably, and Quickly"]
+   [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."]
+   [:p "Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo."]
+
+   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "do this"]
+    [:div.new-step-item "and this"]
+    [:div.new-step-item "and you're done"]]
+
+   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "show pic"]
+    [:div.new-step-item [:h3 "We Do"]
+     [:ul [:li "Make Reports"]
+      [:li "Make Dashboards"]
+      [:li "Teach You How"]]]
+    [:div.new-step-item [:h3 "So That You Can"]
+     [:ul [:li "Be The Hero"]
+      [:li "Accomplish Amazing Things"]
+      [:li "Get The Most From Salesforce"]]]]
+
+   [:h1.why-salesforce-hero "Why Salesforce Hero"]
+   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "Validation #1"]
+    [:div.new-step-item [:h3 "Validation #2"]]
+    [:div.new-step-item [:h3 "Validation #3"]]]
+   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "Validation #4"]
+    [:div.new-step-item [:h3 "Validation #5"]]
+    [:div.new-step-item [:h3 "Validation #6"]]]
+   ])
+
+(defn home-feed-default []
+  [:div "you've been here before"])
+
+(defn home-feed-view [requests]
+  (if (empty? requests)
+    [home-feed-first-time]
+    [home-feed-default]))
 
 (defn home-header-view []
   [:div.hero-home-header [:div.hero-container [:div.hero-avatar {:class "more"} "pic here"]
                           [:div.hero-app-name "Salesforce Hero"]
-                          [:div.hero-tagline "The Best Place to Get Things Done"]]])
+                          [:div.hero-tagline "The Place to Get Things Done"]]])
 
-(defn status-view []
-  [:div [:p "the status is " (get @status-state "status")]])
+(defn request-button-view []
+  [:div.hero-request-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
 
-(defn home-view []
+(defn home-view [requests]
   [:div#hero-home.hero-page {:class "hero-active"} [home-header-view]
-   [home-feed-view]
-   [status-view]])
+   [request-button-view]
+   [home-feed-view requests]])
 
 ; ------------------------------------------------------------------------
 
 (defn app-view []
-  [:div [home-view]
+  [:div.hero-app [home-view @requests-state]
    [task-select-view]
    [task-search-view]
    [task-match-view]
@@ -120,10 +156,10 @@
 
 ; ------------------------------------------------------------------------
 
-(defn request-button-view []
-  [:div.hero-new-request {:on-click #(activate-page "hero-task-select")} "I am the new request"])
-
-(reagent/render-component [request-button-view] (.getElementById js/document "request-button"))
+;(defn request-button-view []
+;  [:div.hero-new-request {:on-click #(activate-page "hero-task-select")} "I am the new request"])
+;
+;(reagent/render-component [request-button-view] (.getElementById js/document "request-button"))
 
 ; ------------------------------------------------------------------------
 
