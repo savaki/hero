@@ -1,0 +1,7 @@
+.hero-page {
+  visibility: hidden;
+}
+
+.hero-page.hero-active {
+  visibility: visible;
+}
