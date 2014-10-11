@@ -87,6 +87,7 @@ body {
 
 body, div, p, td, th {
   font-family: Proxima Nova Soft W03 Reg, arial, helvetica, sans-serif;
+  font-size: 16px;
   position: relative;
 }
 
@@ -125,7 +126,10 @@ body, div, p, td, th {
   font-size: 20px;
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 40px;
+}
+
+.newbie p:first-of-type {
+  margin-top: 40px;
 }
 
 .newbie p {
