@@ -133,7 +133,7 @@
   [:div.hero-home-header [:div.hero-container [:div.hero-avatar {:class "more"} "pic here"]
                           [:div.hero-title {:class "clearfix"}
                            [:div.hero-app-name "Salesforce Hero"]
-                           [:div.hero-tagline "The Place to Get Things Done"]]]])
+                           [:div.hero-tagline "Get Things Done"]]]])
 
 (defn home-view [requests]
   [:div#hero-home.hero-page {:class "hero-active"} [home-header-view]
