@@ -19,7 +19,8 @@ type Config struct {
 var cfg *Config
 
 const (
-	flagPort = "port"
+	flagPort    = "port"
+	flagDocroot = "docroot"
 )
 
 func init() {
@@ -35,6 +36,7 @@ func main() {
 	app.Usage = "DreamForce 2014 Hackathon Entry"
 	app.Flags = []cli.Flag{
 		cli.StringFlag{flagPort, "8080", "the port to run on", "PORT"},
+		cli.StringFlag{flagDocroot, "public", "the directory where our html is located", "DOCROOT"},
 	}
 	app.Action = Run
 	app.Run(os.Args)
@@ -42,17 +44,18 @@ func main() {
 
 func Run(c *cli.Context) {
 	addr := ":" + c.String(flagPort)
+	docroot := c.String(flagDocroot)
 
 	http.HandleFunc("/check/redis", CheckRedis)
-	http.HandleFunc("/", Server())
+	http.HandleFunc("/", Server(docroot))
 
 	log.Println("starting web server on port", addr)
 	http.ListenAndServe(addr, nil)
 }
 
-func Server() http.HandlerFunc {
-	fileServer := http.FileServer(http.Dir("../public"))
-	home := template.Must(template.ParseFiles("../public/index.html"))
+func Server(docroot string) http.HandlerFunc {
+	fileServer := http.FileServer(http.Dir(docroot))
+	home := template.Must(template.ParseFiles(docroot + "/index.html"))
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		switch req.RequestURI {
