@@ -86,23 +86,25 @@
   [:div#hero-task-select.hero-page (for [task-type @task-types] [task-select-item task-type])])
 
 ; ------------------------------------------------------------------------
+; newbie section
+
+(defn request-button-view []
+  [:div.hero-request-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
 
 (defn home-feed-first-time []
   [:div.newbie [:h1 "Worker Smarter"]
    [:h2 "Get Things Done."]
    [:h2 "Securely, Reliably, and Quickly."]
-   [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."]
-   [:p "Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo."]
+   [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."]
 
-   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "do this"]
+   [:div.newbie-step-container [:div.new-step-item "do this"]
     [:div.new-step-item "and this"]
     [:div.new-step-item "and you're done"]]
 
-   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "show pic"]
-    [:div.new-step-item [:h3 "We Do"]
-     [:ul [:li "Make Reports"]
-      [:li "Make Dashboards"]
-      [:li "Teach You How"]]]
+   [:div.newbie-step-container [:div.new-step-item [:h3 "We Do"]
+                                [:ul [:li "Make Reports"]
+                                 [:li "Make Dashboards"]
+                                 [:li "Teach You How"]]]
     [:div.new-step-item [:h3 "So That You Can"]
      [:ul [:li "Be The Hero"]
       [:li "Accomplish Amazing Things"]
@@ -111,10 +113,12 @@
    [:h1.why-salesforce-hero "Why Salesforce Hero"]
    [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "Validation #1"]
     [:div.new-step-item [:h3 "Validation #2"]]
-    [:div.new-step-item [:h3 "Validation #3"]]]
-   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item "Validation #4"]
-    [:div.new-step-item [:h3 "Validation #5"]]
-    [:div.new-step-item [:h3 "Validation #6"]]]
+    [:div.new-step-item [:h3 "Validation #3"]]
+    [:div.new-step-item "Validation #4"]]
+
+   [:div "Meet Matt"]
+   [:h2 "Ready to Start"]
+   [request-button-view]
    ])
 
 (defn home-feed-default []
@@ -129,9 +133,6 @@
   [:div.hero-home-header [:div.hero-container [:div.hero-avatar {:class "more"} "pic here"]
                           [:div.hero-app-name "Salesforce Hero"]
                           [:div.hero-tagline "The Place to Get Things Done"]]])
-
-(defn request-button-view []
-  [:div.hero-request-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
 
 (defn home-view [requests]
   [:div#hero-home.hero-page {:class "hero-active"} [home-header-view]
