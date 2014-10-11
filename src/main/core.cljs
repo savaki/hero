@@ -44,10 +44,14 @@
 (defn home-request-button []
   [:div.hero-new-request "I am the new request"])
 
+(defn status-view []
+  [:div [:p "the status is " (get @status-state "status")]])
+
 (defn home-view []
   [:div.hero-home [home-request-button]
    [home-header-view]
-   [home-feed-view]])
+   [home-feed-view]
+   [status-view]])
 
 (def home-view-with-callback
   (with-meta home-view
