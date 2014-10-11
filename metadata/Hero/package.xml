@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Hero</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <description>Putting the power of the Salesforce Community at your fingertips.  Get the help you need when you need it.</description>
+    <namespacePrefix>Hero</namespacePrefix>
+    <types>
+        <members>MyVFPage</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
+        <members>VFTab</members>
+        <name>CustomTab</name>
+    </types>
+    <version>31.0</version>
+</Package>
