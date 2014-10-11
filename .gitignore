@@ -1,3 +1,14 @@
 # ignore intellij files
+/*.ipr
+/*.iws
+/*.iml
+/.idea
+/.idea_modules
+
+# ignore binaries
 /server/server
+
+# ignore temp
+/*.env
+
 
