@@ -15,6 +15,15 @@
 			"Rev": "e677373ec01e8980e4e2e726efc2ec0cd38db34a"
 		},
 		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v0.4-8-g3b079bb",
+			"Rev": "3b079bb6f79ae501e73a5401c41b589f6616b61e"
+		},
+		{
+			"ImportPath": "github.com/julienschmidt/httprouter",
+			"Rev": "46807412fe50aaceb73bb57061c2230fd26a1640"
+		},
+		{
 			"ImportPath": "github.com/soveran/redisurl",
 			"Rev": "ac42ec99510b5f21d11560d316adcc5bc41f0915"
 		}

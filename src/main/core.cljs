@@ -6,6 +6,10 @@
 
 ; ------------------------------------------------------------------------
 
+(def status-state (atom {}))
+
+; ------------------------------------------------------------------------
+
 (defn activate-page [id]
   (let [element (.getElementById js/document id)]
     (println "activating page," id)
@@ -29,8 +33,26 @@
 
 ; ------------------------------------------------------------------------
 
+(defn home-feed-view []
+  [:div "I'm the feed on the home page"])
+
+(defn home-header-view []
+  [:div.hero-home-header [:div.hero-avatar {:class "more"} "I'm the picture of the dude"]
+   [:div.hero-app-name "Salesforce Hero"]
+   [:div.hero-tagline "Empowering Users Everywhere"]])
+
+(defn home-request-button []
+  [:div.hero-new-request "I am the new request"])
+
 (defn home-view []
-  [:div "I will be the home page"])
+  [:div.hero-home [home-request-button]
+   [home-header-view]
+   [home-feed-view]])
+
+(def home-view-with-callback
+  (with-meta home-view
+    {:component-did-mount #(ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
+                             {:handler (fn [status] (reset! status-state status))})}))
 
 ; ------------------------------------------------------------------------
 
@@ -41,6 +63,6 @@
             :on-click #(activate-page "sample")
             :value "click me"}]])
 
-(reagent/render-component [app-view] (.getElementById js/document "app"))
+(reagent/render-component [home-view-with-callback] (.getElementById js/document "app"))
 
 

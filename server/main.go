@@ -42,9 +42,8 @@ func Run(c *cli.Context) {
 	addr := ":" + c.String(flagPort)
 	docroot := c.String(flagDocroot)
 
-	http.HandleFunc("/check/redis", CheckRedis)
-	http.HandleFunc("/", Server(docroot))
-
 	log.Println("starting web server on port", addr)
-	http.ListenAndServe(addr, nil)
+
+	routes := CreateRoutes(docroot)
+	http.ListenAndServe(addr, routes)
 }
