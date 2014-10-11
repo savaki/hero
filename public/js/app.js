@@ -1001,7 +1001,7 @@ function nc(a) {
   return a.Jc;
 }
 oc = new pc;
-var rc = /^(?:([^:/?#.]+):)?(?:\/\/(?:([^/?#]*)@)?([^/#?]*?)(?::([0-9]+))?(?=[/#?]|$))?([^?#]+)?(?:\?([^#]*))?(?:#(.*))?$/, tc = Ta;
+var sc = /^(?:([^:/?#.]+):)?(?:\/\/(?:([^/?#]*)@)?([^/#?]*?)(?::([0-9]+))?(?=[/#?]|$))?([^?#]+)?(?:\?([^#]*))?(?:#(.*))?$/, tc = Ta;
 function uc(a, b) {
   if (tc) {
     tc = !1;
@@ -1013,7 +1013,7 @@ function uc(a, b) {
       }
     }
   }
-  return b.match(rc)[a] || null;
+  return b.match(sc)[a] || null;
 }
 ;function vc(a) {
   Hb.call(this);
@@ -2748,7 +2748,7 @@ function Me(a, b) {
 h = Me.prototype;
 h.call = function() {
   var a = null;
-  return a = function(a, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, sc) {
+  return a = function(a, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, rc) {
     switch(arguments.length) {
       case 1:
         var w = a, w = this;
@@ -2794,7 +2794,7 @@ h.call = function() {
       case 21:
         return w = a, w = this, w.f.Ha ? w.f.Ha(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa) : w.f.call(null, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa);
       case 22:
-        return w = a, w = this, V.bd ? V.bd(w.f, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, sc) : V.call(null, w.f, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, sc);
+        return w = a, w = this, V.bd ? V.bd(w.f, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, rc) : V.call(null, w.f, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, Fa, rc);
     }
     throw Error("Invalid arity: " + arguments.length);
   };
@@ -3922,10 +3922,10 @@ function Hf(a, b, c) {
   if (19 === b) {
     return a.Ga ? a.Ga(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra) : a.Ga ? a.Ga(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra) : a.call(null, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra);
   }
-  var sc = od(Fa);
+  var rc = od(Fa);
   A(Fa);
   if (20 === b) {
-    return a.Ha ? a.Ha(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, sc) : a.Ha ? a.Ha(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, sc) : a.call(null, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, sc);
+    return a.Ha ? a.Ha(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, rc) : a.Ha ? a.Ha(c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, rc) : a.call(null, c, d, e, f, g, k, l, m, n, q, x, D, C, E, K, P, W, aa, ra, rc);
   }
   throw Error("Only up to 20 arguments supported on functions");
 }
@@ -9276,7 +9276,7 @@ function om(a) {
   b = document.getElementById(a);
   Ah.d(N(["activating page", a], 0));
   b.className = "hero-page hero-active";
-  return Velocity(b, "transition.slideRightBigIn", 250);
+  return Velocity(b, "transition.slideRightBigIn", 400);
 }
 function pm(a) {
   return new Y(null, 3, 5, Z, [oj, new Y(null, 1, 5, Z, [wi], null), new Y(null, 2, 5, Z, [Ki, a], null)], null);
@@ -9341,28 +9341,27 @@ function wm() {
   }()], null);
 }
 function xm() {
-  return new Y(null, 10, 5, Z, [fi, new Y(null, 2, 5, Z, [nj, "Worker Smarter"], null), new Y(null, 2, 5, Z, [fj, "Get Things Done Securely, Reliably, and Quickly"], null), new Y(null, 2, 5, Z, [rj, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."], null), new Y(null, 2, 5, Z, [rj, "Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo."], 
-  null), new Y(null, 5, 5, Z, [di, new r(null, 1, [aj, "clearfix"], null), new Y(null, 2, 5, Z, [Si, "do this"], null), new Y(null, 2, 5, Z, [Si, "and this"], null), new Y(null, 2, 5, Z, [Si, "and you're done"], null)], null), new Y(null, 5, 5, Z, [di, new r(null, 1, [aj, "clearfix"], null), new Y(null, 2, 5, Z, [Si, "show pic"], null), new Y(null, 3, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "We Do"], null), new Y(null, 4, 5, Z, [gi, new Y(null, 2, 5, Z, [ui, "Make Reports"], null), new Y(null, 2, 5, 
-  Z, [ui, "Make Dashboards"], null), new Y(null, 2, 5, Z, [ui, "Teach You How"], null)], null)], null), new Y(null, 3, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "So That You Can"], null), new Y(null, 4, 5, Z, [gi, new Y(null, 2, 5, Z, [ui, "Be The Hero"], null), new Y(null, 2, 5, Z, [ui, "Accomplish Amazing Things"], null), new Y(null, 2, 5, Z, [ui, "Get The Most From Salesforce"], null)], null)], null)], null), new Y(null, 2, 5, Z, [Gi, "Why Salesforce Hero"], null), new Y(null, 5, 5, Z, [di, new r(null, 
-  1, [aj, "clearfix"], null), new Y(null, 2, 5, Z, [Si, "Validation #1"], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "Validation #2"], null)], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "Validation #3"], null)], null)], null), new Y(null, 5, 5, Z, [di, new r(null, 1, [aj, "clearfix"], null), new Y(null, 2, 5, Z, [Si, "Validation #4"], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "Validation #5"], null)], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 
-  5, Z, [pj, "Validation #6"], null)], null)], null)], null);
-}
-function ym() {
-  return new Y(null, 2, 5, Z, [Ti, "you've been here before"], null);
-}
-function zm(a) {
-  return Pe(a) ? new Y(null, 1, 5, Z, [xm], null) : new Y(null, 1, 5, Z, [ym], null);
-}
-function Am() {
-  return new Y(null, 2, 5, Z, [Li, new Y(null, 4, 5, Z, [cj, new Y(null, 3, 5, Z, [Ui, new r(null, 1, [aj, "more"], null), "pic here"], null), new Y(null, 2, 5, Z, [$h, "Salesforce Hero"], null), new Y(null, 2, 5, Z, [$i, "The Place to Get Things Done"], null)], null)], null);
-}
-function Bm() {
   return new Y(null, 3, 5, Z, [ki, new r(null, 1, [Ji, function() {
     return om("hero-task-select");
   }], null), "Get Started"], null);
 }
+function ym() {
+  return new Y(null, 12, 5, Z, [fi, new Y(null, 2, 5, Z, [nj, "Worker Smarter"], null), new Y(null, 2, 5, Z, [fj, "Get Things Done."], null), new Y(null, 2, 5, Z, [fj, "Securely, Reliably, and Quickly."], null), new Y(null, 2, 5, Z, [rj, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."], null), new Y(null, 4, 5, Z, [di, new Y(null, 2, 5, Z, [Si, "do this"], null), new Y(null, 2, 5, Z, [Si, "and this"], 
+  null), new Y(null, 2, 5, Z, [Si, "and you're done"], null)], null), new Y(null, 3, 5, Z, [di, new Y(null, 3, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "We Do"], null), new Y(null, 4, 5, Z, [gi, new Y(null, 2, 5, Z, [ui, "Make Reports"], null), new Y(null, 2, 5, Z, [ui, "Make Dashboards"], null), new Y(null, 2, 5, Z, [ui, "Teach You How"], null)], null)], null), new Y(null, 3, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "So That You Can"], null), new Y(null, 4, 5, Z, [gi, new Y(null, 2, 5, Z, [ui, "Be The Hero"], 
+  null), new Y(null, 2, 5, Z, [ui, "Accomplish Amazing Things"], null), new Y(null, 2, 5, Z, [ui, "Get The Most From Salesforce"], null)], null)], null)], null), new Y(null, 2, 5, Z, [Gi, "Why Salesforce Hero"], null), new Y(null, 6, 5, Z, [di, new r(null, 1, [aj, "clearfix"], null), new Y(null, 2, 5, Z, [Si, "Validation #1"], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "Validation #2"], null)], null), new Y(null, 2, 5, Z, [Si, new Y(null, 2, 5, Z, [pj, "Validation #3"], null)], null), 
+  new Y(null, 2, 5, Z, [Si, "Validation #4"], null)], null), new Y(null, 2, 5, Z, [Ti, "Meet Matt"], null), new Y(null, 2, 5, Z, [fj, "Ready to Start"], null), new Y(null, 1, 5, Z, [xm], null)], null);
+}
+function zm() {
+  return new Y(null, 2, 5, Z, [Ti, "you've been here before"], null);
+}
+function Am(a) {
+  return Pe(a) ? new Y(null, 1, 5, Z, [ym], null) : new Y(null, 1, 5, Z, [zm], null);
+}
+function Bm() {
+  return new Y(null, 2, 5, Z, [Li, new Y(null, 4, 5, Z, [cj, new Y(null, 3, 5, Z, [Ui, new r(null, 1, [aj, "more"], null), "pic here"], null), new Y(null, 2, 5, Z, [$h, "Salesforce Hero"], null), new Y(null, 2, 5, Z, [$i, "The Place to Get Things Done"], null)], null)], null);
+}
 function Cm(a) {
-  return new Y(null, 5, 5, Z, [Ei, new r(null, 1, [aj, "hero-active"], null), new Y(null, 1, 5, Z, [Am], null), new Y(null, 1, 5, Z, [Bm], null), new Y(null, 2, 5, Z, [zm, a], null)], null);
+  return new Y(null, 5, 5, Z, [Ei, new r(null, 1, [aj, "hero-active"], null), new Y(null, 1, 5, Z, [Bm], null), new Y(null, 1, 5, Z, [xm], null), new Y(null, 2, 5, Z, [Am, a], null)], null);
 }
 function Dm() {
   return new Y(null, 7, 5, Z, [Zh, new Y(null, 2, 5, Z, [Cm, Ed(mm)], null), new Y(null, 1, 5, Z, [wm], null), new Y(null, 1, 5, Z, [um], null), new Y(null, 1, 5, Z, [tm], null), new Y(null, 1, 5, Z, [sm], null), new Y(null, 1, 5, Z, [rm], null)], null);

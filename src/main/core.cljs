@@ -38,7 +38,7 @@
   (let [element (.getElementById js/document id)]
     (println "activating page" id)
     (set! (.-className element) "hero-page hero-active")
-    (js/Velocity element "transition.slideRightBigIn" 250)))
+    (js/Velocity element "transition.slideRightBigIn" 400)))
 
 ; ------------------------------------------------------------------------
 ; reusable display elements
