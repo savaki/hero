@@ -37,9 +37,9 @@
   [:div "I'm the feed on the home page"])
 
 (defn home-header-view []
-  [:div.hero-home-header [:div.hero-avatar {:class "more"} "I'm the picture of the dude"]
-   [:div.hero-app-name "Salesforce Hero"]
-   [:div.hero-tagline "Empowering Users Everywhere"]])
+  [:div.hero-home-header [:div.hero-container [:div.hero-avatar {:class "more"} "pic here"]
+                          [:div.hero-app-name "Salesforce Hero"]
+                          [:div.hero-tagline "The Best Place to Get Things Done"]]])
 
 (defn home-request-button []
   [:div.hero-new-request "I am the new request"])
