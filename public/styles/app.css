@@ -62,16 +62,18 @@ body, div, p, td, th {
 
 .hero-page {
   visibility: hidden;
+  position: absolute;
 }
 
 .hero-page.hero-active {
   visibility: visible;
+  position: relative;
 }
 
 /*------------------------------------------------------------------*/
 
 .hero-new-request {
-
+  cursor: pointer;
 }
 
 /*------------------------------------------------------------------*/
@@ -108,4 +110,17 @@ body, div, p, td, th {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+}
+
+/*------------------------------------------------------------------*/
+
+.task-select-item {
+  cursor: pointer;
+}
+
+.task-item {
+  border:1px solid blue;
+  width: 90%;
+  margin: 5px auto 5px auto;
+  padding: 10px;
 }
