@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/codegangsta/cli"
-	"github.com/savaki/redisurl"
+	"github.com/soveran/redisurl"
 	"io"
 	"net/http"
 	"os"
