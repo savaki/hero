@@ -14,6 +14,26 @@
 
 ; ------------------------------------------------------------------------
 
+(defn task-match-view []
+  [:div "I will be the work selection page"])
+
+; ------------------------------------------------------------------------
+
+(defn task-search-view []
+  [:div "I will be the work selection page"])
+
+; ------------------------------------------------------------------------
+
+(defn task-select-view []
+  [:div "I will be the work selection page"])
+
+; ------------------------------------------------------------------------
+
+(defn home-view []
+  [:div "I will be the home page"])
+
+; ------------------------------------------------------------------------
+
 (defn app-view []
   [:div [:div.title [:h1 "Hello World"]]
    [:p#sample.hero-page "this is a page"]
