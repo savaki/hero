@@ -1,0 +1,22 @@
+{
+	"ImportPath": "github.com/savaki/hero",
+	"GoVersion": "go1.3.1",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-16-gaa19913",
+			"Rev": "aa19913be3107ab75ea67a5a88d667d62a69dbbd"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Rev": "e677373ec01e8980e4e2e726efc2ec0cd38db34a"
+		},
+		{
+			"ImportPath": "github.com/soveran/redisurl",
+			"Rev": "ac42ec99510b5f21d11560d316adcc5bc41f0915"
+		}
+	]
+}
