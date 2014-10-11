@@ -57,9 +57,8 @@ func CheckRedis(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
-	w.Header().Set("Pragma", "no-cache")
-	w.Header().Set("Expires", "0")
+	// simple form for fastly to not cache
+	w.Header().Set("Cache-Control", "private")
 
 	w.WriteHeader(200)
 	io.WriteString(w, string(v.([]byte)))
