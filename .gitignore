@@ -10,5 +10,9 @@
 
 # ignore temp
 /*.env
+/.lein-env
+
+# ignore development files
+/public/dev
 
 
