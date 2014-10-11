@@ -9218,18 +9218,18 @@ function Gl() {
   return new Y(null, 2, 5, Z, [qi, new Y(null, 4, 5, Z, [Gi, new Y(null, 3, 5, Z, [yi, new r(null, 1, [Ei, "more"], null), "pic here"], null), new Y(null, 2, 5, Z, [Vh, "Salesforce Hero"], null), new Y(null, 2, 5, Z, [Di, "The Best Place to Get Things Done"], null)], null)], null);
 }
 function Hl() {
-  return new Y(null, 2, 5, Z, [Ki, "I am the new request"], null);
-}
-function Il() {
   return new Y(null, 2, 5, Z, [xi, new Y(null, 3, 5, Z, [Qi, "the status is ", T.a(Cd(El), "status")], null)], null);
 }
-var Jl = Le(function() {
-  return new Y(null, 5, 5, Z, [Yh, new Y(null, 1, 5, Z, [Hl], null), new Y(null, 1, 5, Z, [Gl], null), new Y(null, 1, 5, Z, [Fl], null), new Y(null, 1, 5, Z, [Il], null)], null);
+var Il = Le(function() {
+  return new Y(null, 4, 5, Z, [Yh, new Y(null, 1, 5, Z, [Gl], null), new Y(null, 1, 5, Z, [Fl], null), new Y(null, 1, 5, Z, [Hl], null)], null);
 }, new r(null, 1, [li, function() {
   return hk.d("https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors", N([new r(null, 1, [Pi, function(a) {
     return Ch(El, a);
   }], null)], 0));
 }], null));
-Dl.a(new Y(null, 1, 5, Z, [Jl], null), document.getElementById("app"));
+Dl.a(new Y(null, 1, 5, Z, [Il], null), document.getElementById("app"));
+Dl.a(new Y(null, 1, 5, Z, [function() {
+  return new Y(null, 3, 5, Z, [Ki, new r(null, 1, [Ei, "sg-icon-art sg-icn--fnt center tc icon-utility-add"], null), "I am the new request"], null);
+}], null), document.getElementById("request-button"));
 
 })();

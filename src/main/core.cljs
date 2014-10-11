@@ -41,14 +41,11 @@
                           [:div.hero-app-name "Salesforce Hero"]
                           [:div.hero-tagline "The Best Place to Get Things Done"]]])
 
-(defn home-request-button []
-  [:div.hero-new-request "I am the new request"])
-
 (defn status-view []
   [:div [:p "the status is " (get @status-state "status")]])
 
 (defn home-view []
-  [:div.hero-home [home-request-button]
+  [:div.hero-home
    [home-header-view]
    [home-feed-view]
    [status-view]])
@@ -57,6 +54,15 @@
   (with-meta home-view
     {:component-did-mount #(ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
                              {:handler (fn [status] (reset! status-state status))})}))
+
+(reagent/render-component [home-view-with-callback] (.getElementById js/document "app"))
+
+; ------------------------------------------------------------------------
+
+(defn request-button-view []
+  [:div.hero-new-request {:class "sg-icon-art sg-icn--fnt center tc icon-utility-add"} "I am the new request"])
+
+(reagent/render-component [request-button-view] (.getElementById js/document "request-button"))
 
 ; ------------------------------------------------------------------------
 
@@ -67,6 +73,5 @@
             :on-click #(activate-page "sample")
             :value "click me"}]])
 
-(reagent/render-component [home-view-with-callback] (.getElementById js/document "app"))
 
 

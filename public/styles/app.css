@@ -57,6 +57,7 @@ table {
 
 body, div, p, td, th {
   font-family: Proxima Nova Soft W03 Reg, arial, helvetica, sans-serif;
+  position: relative;
 }
 
 .hero-page {
@@ -69,16 +70,22 @@ body, div, p, td, th {
 
 /*------------------------------------------------------------------*/
 
+.hero-new-request {
+
+}
+
+/*------------------------------------------------------------------*/
+
 .hero-home-header {
   padding: 18px;
-  height: 275px;
+  height: 120px;
   background-color: #344A5F;
   color: white;
 }
 
 .hero-avatar {
-  width: 125px;
-  height: 125px;
+  width: 64px;
+  height: 64px;
   margin: 5px auto;
   border-radius: 5px;
   background-color: #ffffff;
@@ -92,7 +99,7 @@ body, div, p, td, th {
 }
 
 .hero-tagline {
-
+  margin-top: 5px;
 }
 
 .hero-container {
