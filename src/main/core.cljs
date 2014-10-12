@@ -85,6 +85,7 @@
 
 (defn activate-page [id]
   (doseq [page-id @page-ids] (deactivate-page page-id))
+  (reset! seconds-elapsed 0)
   (let [element (.getElementById js/document id)]
     (println "activating page" id)
     (js/setTimeout #(reset! page-id-state id), 500)
@@ -202,7 +203,6 @@
   [:div [:h2.time-remaining-update "Fingers crossed."]])
 
 (defn task-searching-for-provider []
-  (js/setTimeout #(swap! seconds-elapsed inc) 1000)
   (let [time-remaining (- 60 @seconds-elapsed)]
     [:div [:h2.select-task "Searching for a provider ..."]
      (cond (<= time-remaining 0) [no-provider-view]
@@ -308,6 +308,10 @@
    [task-detail-view]
    [task-feedback-view]])
 
+(defn countdown []
+  (swap! seconds-elapsed inc)
+  (js/setTimeout #(countdown) 1000))
+
 (defn app-boot []
   (println "initializing pubnub")
   (reset! pubnub-state (.init js/PUBNUB (clj->js {:publish_key (get-in keys-state "pubnub-publish-key")
@@ -323,6 +327,9 @@
   (.subscribe @pubnub-state (clj->js {:channel user-id,
                                       :connect #(println "Connected to private channel," user-id ", via TLS")
                                       :message (fn [m] (pubnub-receive-message m))}))
+
+  (countdown)
+
   (ajax/GET "/api/requests"
     {:handler (fn [entries] (reset! requests-state entries))}))
 
