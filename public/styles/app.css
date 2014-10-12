@@ -83,6 +83,7 @@ table {
 
 body {
   background-color: #f9fbfc;
+  overflow-x: hidden;
 }
 
 body, div, p, td, th, li {
