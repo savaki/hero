@@ -204,6 +204,7 @@
 
 (defn task-searching-for-provider []
   (let [time-remaining (- 60 @seconds-elapsed)]
+    (js/setTimeout #(swap! seconds-elapsed inc) 1000)
     [:div [:h2.select-task "Searching for a provider ..."]
      (cond (<= time-remaining 0) [no-provider-view]
        (and (< time-remaining 58) (> time-remaining 55)) [keep-your-fingers-crossed]
@@ -308,10 +309,6 @@
    [task-detail-view]
    [task-feedback-view]])
 
-(defn countdown []
-  (swap! seconds-elapsed inc)
-  (js/setTimeout #(countdown) 1000))
-
 (defn app-boot []
   (println "initializing pubnub")
   (reset! pubnub-state (.init js/PUBNUB (clj->js {:publish_key (get-in keys-state "pubnub-publish-key")
@@ -327,8 +324,6 @@
   (.subscribe @pubnub-state (clj->js {:channel user-id,
                                       :connect #(println "Connected to private channel," user-id ", via TLS")
                                       :message (fn [m] (pubnub-receive-message m))}))
-
-  (countdown)
 
   (ajax/GET "/api/requests"
     {:handler (fn [entries] (reset! requests-state entries))}))

@@ -9424,6 +9424,11 @@ function en() {
 }
 function fn() {
   var a = 60 - Fd(Hm);
+  setTimeout(function() {
+    return function() {
+      return Jh.a(Hm, ze);
+    };
+  }(a), 1E3);
   return new Y(null, 3, 5, Z, [Ti, new Y(null, 2, 5, Z, [uj, "Searching for a provider ..."], null), 0 >= a ? new Y(null, 1, 5, Z, [cn], null) : 58 > a && 55 < a ? new Y(null, 1, 5, Z, [en], null) : 12 > a && 5 < a ? new Y(null, 1, 5, Z, [dn], null) : u ? new Y(null, 2, 5, Z, [Fi, a], null) : null], null);
 }
 function gn() {
@@ -9488,13 +9493,7 @@ function nn() {
 function on(a) {
   return new Y(null, 5, 5, Z, [Gi, Lm("hero-home"), new Y(null, 1, 5, Z, [Qm], null), new Y(null, 1, 5, Z, [ln], null), new Y(null, 2, 5, Z, [nn, a], null)], null);
 }
-var qn = function pn() {
-  Jh.a(Hm, ze);
-  return setTimeout(function() {
-    return pn();
-  }, 1E3);
-};
-function rn() {
+function pn() {
   Ch.d(N(["initializing pubnub"], 0));
   Ih(Km, hb(PUBNUB, Ph(new q(null, 3, [wj, Qf.a(Bm, "pubnub-publish-key"), ci, Qf.a(Bm, "pubnub-subscribe-key"), di, !0], null))));
   Ch.d(N(["subscribing to requests channel"], 0));
@@ -9509,16 +9508,15 @@ function rn() {
   }, Gj, function(a) {
     return Ch.d(N(["receiving message \x3d\x3e", a], 0));
   }], null)));
-  qn();
   return al.d("/api/requests", N([new q(null, 1, [Bj, function(a) {
     return Ih(Jm, a);
   }], null)], 0));
 }
-var sn = Oe(function() {
+var qn = Oe(function() {
   return new Y(null, 7, 5, Z, [ai, new Y(null, 2, 5, Z, [on, Fd(Jm)], null), new Y(null, 1, 5, Z, [kn], null), new Y(null, 1, 5, Z, [gn], null), new Y(null, 1, 5, Z, [Xm], null), new Y(null, 1, 5, Z, [Wm], null), new Y(null, 1, 5, Z, [Vm], null)], null);
 }, new q(null, 1, [Bi, function() {
-  return rn();
+  return pn();
 }], null));
-xm.a(new Y(null, 1, 5, Z, [sn], null), document.getElementById("app"));
+xm.a(new Y(null, 1, 5, Z, [qn], null), document.getElementById("app"));
 
 })();
