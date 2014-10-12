@@ -34,6 +34,7 @@ func CreateRoutes(docroot string) *gin.Engine {
 	routes.Static("/js", docroot+"/js")
 	routes.Static("/dev", docroot+"/dev")
 	routes.Static("/styles", docroot+"/styles")
+	routes.Static("/images", docroot+"/images")
 
 	return routes
 }

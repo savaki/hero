@@ -103,7 +103,7 @@
 ; reusable display elements
 
 (defn home-header-view []
-  [:div.hero-header-home [:div.hero-avatar {:class "more"} "pic here"]
+  [:div.hero-header-home [:div.hero-avatar {:class "more"} ""]
    [:div.hero-title {:class "clearfix"}
     [:div.hero-app-name "Salesforce Hero"]
     [:div.hero-tagline "Get Things Done"]]])
@@ -258,10 +258,18 @@
   [:div.hero-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
 
 (defn home-feed-first-time []
-  [:div.newbie [:h1 "Worker Smarter"]
+  [:div.newbie [:h1 "Work Smarter"]
+
    [:h2 "Get Things Done."]
-   [:h2 "Securely, Reliably, Quickly."]
-   [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."]
+   [:p "Find the help you need when you need it.  Right from your fingertips."]
+
+   [:br]
+   [:h2 "Safe and Secure"]
+   [:p "Salesforce Hero keeps your data safe.  Providers only have access to the meta data, never the data itself."]
+
+   [:br]
+   [:h2 "Democratizes Salesforce"]
+   [:p "Putting valuable features of Salesforce in the reach of everyone regardless of training."]
 
    ;   [:div.newbie-step-container [:div.new-step-item [:p "do this"]]
    ;    [:div.new-step-item "and this"]

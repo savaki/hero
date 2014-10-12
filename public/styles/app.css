@@ -193,7 +193,7 @@ body, div, p, td, th, li {
   height: 64px;
   margin: 5px auto;
   border-radius: 5px;
-  background-color: #ffffff;
+  background: #ffffff url(/images/logo.png) 200%;
   float: left;
 }
 

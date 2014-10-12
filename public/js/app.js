@@ -9358,7 +9358,7 @@ function Pm() {
   }], null), "Back"], null);
 }
 function Qm() {
-  return new Y(null, 3, 5, Z, [ii, new Y(null, 3, 5, Z, [Ui, new q(null, 1, [dj, "more"], null), "pic here"], null), new Y(null, 4, 5, Z, [qj, new q(null, 1, [dj, "clearfix"], null), new Y(null, 2, 5, Z, [bi, "Salesforce Hero"], null), new Y(null, 2, 5, Z, [cj, "Get Things Done"], null)], null)], null);
+  return new Y(null, 3, 5, Z, [ii, new Y(null, 3, 5, Z, [Ui, new q(null, 1, [dj, "more"], null), ""], null), new Y(null, 4, 5, Z, [qj, new q(null, 1, [dj, "clearfix"], null), new Y(null, 2, 5, Z, [bi, "Salesforce Hero"], null), new Y(null, 2, 5, Z, [cj, "Get Things Done"], null)], null)], null);
 }
 function Rm(a, b, c) {
   return new Y(null, 4, 5, Z, [Ni, new Y(null, 2, 5, Z, [Cj, new Y(null, 1, 5, Z, [b], null)], null), new Y(null, 2, 5, Z, [Vi, new Y(null, 1, 5, Z, [c], null)], null), new Y(null, 2, 5, Z, [hj, new Y(null, 2, 5, Z, [yj, a], null)], null)], null);
@@ -9489,7 +9489,8 @@ function nn() {
   }], null), "Get Started"], null);
 }
 function on() {
-  return new Y(null, 5, 5, Z, [hi, new Y(null, 2, 5, Z, [vj, "Worker Smarter"], null), new Y(null, 2, 5, Z, [jj, "Get Things Done."], null), new Y(null, 2, 5, Z, [jj, "Securely, Reliably, Quickly."], null), new Y(null, 2, 5, Z, [Dj, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."], null)], null);
+  return new Y(null, 10, 5, Z, [hi, new Y(null, 2, 5, Z, [vj, "Work Smarter"], null), new Y(null, 2, 5, Z, [jj, "Get Things Done."], null), new Y(null, 2, 5, Z, [Dj, "Find the help you need when you need it.  Right from your fingertips."], null), new Y(null, 1, 5, Z, [kj], null), new Y(null, 2, 5, Z, [jj, "Safe and Secure"], null), new Y(null, 2, 5, Z, [Dj, "Salesforce Hero keeps your data safe.  Providers only have access to the meta data, never the data itself."], null), new Y(null, 1, 5, Z, [kj], 
+  null), new Y(null, 2, 5, Z, [jj, "Democratizes Salesforce"], null), new Y(null, 2, 5, Z, [Dj, "Putting valuable features of Salesforce in the reach of everyone regardless of training."], null)], null);
 }
 function pn() {
   return new Y(null, 1, 5, Z, [on], null);
