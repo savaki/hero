@@ -45,7 +45,14 @@ func Home(docroot string) gin.HandlerFunc {
 			// in development mode reload the template
 			home = LoadTemplate(docroot, "/index.html")
 		}
-		home.Execute(c.Writer, cfg)
+
+		userId, _ := c.Get(UserId)
+		home.Execute(c.Writer, Config{
+			IsProduction:       cfg.IsProduction,
+			PubNubPublishKey:   cfg.PubNubPublishKey,
+			PubNubSubscribeKey: cfg.PubNubSubscribeKey,
+			UserId:             userId.(string),
+		})
 	}
 }
 

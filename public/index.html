@@ -5,6 +5,13 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" type="text/css" href="styles/app.css">
   <link rel="stylesheet" type="text/css" href="//fast.fonts.net/cssapi/1341617c-2908-4a91-9f2f-737b9df7c4dc.css"/>
+  <script type="text/javascript" language="JavaScript">
+    var Hero = {
+      Id: '{{.UserId}}',
+      PubNubPublishKey: '{{.PubNubPublishKey}}',
+      PubNubSubscribeKey: '{{.PubNubSubscribeKey}}'
+    }
+  </script>
 </head>
 <body>
 <div class="container">
@@ -15,6 +22,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.ui.min.js"></script>
+<script src=//cdn.pubnub.com/pubnub-3.6.7.min.js></script>
 {{if .IsProduction}}
 <script src="js/app.js" type="text/javascript"></script>
 {{else}}

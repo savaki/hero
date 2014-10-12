@@ -6,6 +6,11 @@
 
 ; ------------------------------------------------------------------------
 
+(def user-id (.-Id js/Hero))
+
+(def keys-state (atom {:pubnub-publish-key (.-PubNubPublishKey js/Hero)
+                       :pubnub-subscribe-key (.-PubNubPublishKey js/Hero)}))
+
 (def status-state (atom {}))
 
 (def page-ids (atom ["hero-task-feedback"
@@ -24,19 +29,46 @@
 
 (def requests-state (atom []))
 
+(def pubnub-state (atom nil))
+
+; ------------------------------------------------------------------------
+
+(defn log [& more]
+  (.apply (.-log js/console) js/console
+    (into-array (map #(if (satisfies? cljs.core.ISeqable %)
+                        (pr-str %)
+                        %)
+                  more))))
+
+; ------------------------------------------------------------------------
+
+(defn pubnub-send-request [message]
+  (.publish @pubnub-state (clj->js {:channel "requests",
+                                    :message {"text" message}})))
+
+(defn pubnub-send-message [recipient message]
+  (.publish @pubnub-state (clj->js {:channel recipient,
+                                    :message {"text" message}})))
+
+(defn pubnub-receive-request [message]
+  (log "receiving request =>" message))
+
+(defn pubnub-receive-message [message]
+  (log "receiving message =>" message))
+
 ; ------------------------------------------------------------------------
 
 ; hard coding logic here where a hero page is only allowed to be in two
 ; states with regards to classes, 'hero-page' and 'hero-page hero-active'
 (defn deactivate-page [id]
-  (println "deactivating page" id)
+  (log "deactivating page" id)
   (let [element (.getElementById js/document id)]
     (set! (.-className element) "hero-page")))
 
 (defn activate-page [id]
   (doseq [page-id @page-ids] (deactivate-page page-id))
   (let [element (.getElementById js/document id)]
-    (println "activating page" id)
+    (log "activating page" id)
     (set! (.-className element) "hero-page hero-active")
     (js/Velocity element "transition.slideRightBigIn" 400)))
 
@@ -98,6 +130,15 @@
 (defn task-select-item [task-type]
   [:a.task-select-item {:on-click #(activate-page "hero-task-search")}
    [task-item task-type]])
+
+(defn chat-input []
+  (let [val (atom "")]
+    (fn []
+      [:div [:input {:type "text"
+                     :on-change #(reset! val (-> % .-target .-value))}]
+       [:input {:type "button"
+                :value "Send"
+                :on-click #(pubnub-send-request @val)}]])))
 
 (defn task-select-view []
   [:div#hero-task-select.hero-page [hero-header-view "Request Item" noop noop]
@@ -163,28 +204,23 @@
    [task-detail-view]
    [task-feedback-view]])
 
+(defn app-boot []
+  (log "booting cljs app")
+  (reset! pubnub-state (.init js/PUBNUB (clj->js {:publish_key (get-in keys-state :pubnub-publish-key)
+                                                  :subscribe_key (get-in keys-state :pubnub-subscribe-key)
+                                                  :ssl true})))
+  (.subscribe @pubnub-state (clj->js {:channel "requests",
+                                      :connect #(log "Connected to requests channel via TLS")
+                                      :message (fn [m] (pubnub-receive-request m))}))
+  (.subscribe @pubnub-state (clj->js {:channel user-id,
+                                      :connect #(log "Connected to private channel," user-id ", via TLS")
+                                      :message (fn [m] (pubnub-receive-message m))}))
+  (ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
+    {:handler (fn [status] (reset! status-state status))}))
+
 (def app-view-with-callback
   (with-meta app-view
-    {:component-did-mount #(ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
-                             {:handler (fn [status] (reset! status-state status))})}))
+    {:component-did-mount #(app-boot)}))
 
 (reagent/render-component [app-view-with-callback] (.getElementById js/document "app"))
-
-; ------------------------------------------------------------------------
-
-;(defn request-button-view []
-;  [:div.hero-new-request {:on-click #(activate-page "hero-task-select")} "I am the new request"])
-;
-;(reagent/render-component [request-button-view] (.getElementById js/document "request-button"))
-
-; ------------------------------------------------------------------------
-
-(defn app-view []
-  [:div [:div.title [:h1 "Hello World"]]
-   [:p#sample.hero-page "this is a page"]
-   [:input {:type "button"
-            :on-click #(activate-page "sample")
-            :value "click me"}]])
-
-
 

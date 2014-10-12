@@ -10,8 +10,9 @@ import (
 )
 
 const (
-	CookieName    = "hero-session"
-	sessionUserId = "userId"
+	CookieName  = "hero-session"
+	UserId      = "userId"
+	AccessToken = "accessToken"
 )
 
 func AuthProvider() (verify, authorize gin.HandlerFunc) {
@@ -39,11 +40,13 @@ func AuthProvider() (verify, authorize gin.HandlerFunc) {
 		}
 		defer session.Save(c.Request, c.Writer)
 
-		if session.Values[sessionUserId] == nil {
+		if session.Values[UserId] == nil {
 			log.Println("no session id, sending to oauth login")
 			c.Redirect(302, sfdc.Url("touch"))
 			return
 		}
+
+		c.Set(UserId, session.Values[UserId])
 
 		c.Next()
 	}
@@ -70,7 +73,8 @@ func AuthProvider() (verify, authorize gin.HandlerFunc) {
 			}
 
 			log.Println("saving session data")
-			session.Values[sessionUserId] = token.Id
+			session.Values[UserId] = token.Id
+			session.Values[AccessToken] = token.AccessToken
 			session.Save(c.Request, c.Writer)
 
 			c.Redirect(302, "/")
