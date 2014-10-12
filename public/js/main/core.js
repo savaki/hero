@@ -16,7 +16,7 @@ return reagent.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentA
 main.core.status_state = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentArrayMap.EMPTY);
 main.core.page_id_state = reagent.core.atom.cljs$core$IFn$_invoke$arity$1("hero-home");
 main.core.page_ids = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, ["hero-task-feedback","hero-task-detail","hero-task-match","hero-task-detail","hero-task-search","hero-task-select","hero-home"], null));
-main.core.task_types = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, ["new-report","new-dashboard","custom-report","show-me-how","talk-to-expert"], null));
+main.core.task_types = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["Create a New Report","Find a Screencast","Need a Question Answered"], null));
 main.core.current_request_state = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(new cljs.core.PersistentArrayMap(null, 3, ["user-id",main.core.user_id,"status",null,"task-type",null], null));
 main.core.requests_state = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(cljs.core.PersistentVector.EMPTY);
 main.core.pubnub_state = reagent.core.atom.cljs$core$IFn$_invoke$arity$1(null);
@@ -133,13 +133,13 @@ return ajax.core.GET.cljs$core$IFn$_invoke$arity$variadic("/api/requests",cljs.c
 })], null)], 0));
 });
 main.core.task_search_find_provider = (function task_search_find_provider(){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$86,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$87,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.constant$keyword$88,"button",cljs.core.constant$keyword$64,(function (){return main.core.task_search_find_provider_action();
-})], null),"Request Hero"], null)], null);
+})], null),"Request Provider"], null)], null);
 });
-main.core.task_search_show_provider = (function task_search_show_provider(provider){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$89,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$87,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$88,"button"], null),"Request Hero"], null)], null);
+main.core.task_search_show_provider = (function task_search_show_provider(provider){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$89,new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$87,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$88,"button"], null),"Request Provider"], null)], null);
 });
 main.core.task_search_contents = (function task_search_contents(){var provider = main.core.current_request_provider();return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$90,((cljs.core.empty_QMARK_(provider))?new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_find_provider], null):new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_show_provider,provider], null))], null);
 });
-main.core.task_search_view = (function task_search_view(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$91,main.core.page_state_class("hero-task-search"),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.hero_header_view,"Request Item",main.core.back_to_home,main.core.blank], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_item,"new-report"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_contents], null)], null);
+main.core.task_search_view = (function task_search_view(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$91,main.core.page_state_class("hero-task-search"),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.hero_header_view,"Request Item",main.core.back_to_home,main.core.blank], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_item,cljs.core.get.cljs$core$IFn$_invoke$arity$2(cljs.core.deref(main.core.current_request_state),"request-type")], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_contents], null)], null);
 });
 main.core.select_task_type = (function select_task_type(request_type){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["selected task type, ",request_type], 0));
 setTimeout((function (){return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(main.core.current_request_state,cljs.core.assoc,"request-type",request_type);
@@ -160,7 +160,7 @@ return (function (){return main.core.pubnub_send_request(cljs.core.deref(val));
 });
 ;})(val))
 });
-main.core.task_select_view = (function task_select_view(){return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$96,main.core.page_state_class("hero-task-select"),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.hero_header_view,"Request Item",main.core.cancel_to_home,main.core.blank], null),(function (){var iter__4269__auto__ = (function iter__5235(s__5236){return (new cljs.core.LazySeq(null,(function (){var s__5236__$1 = s__5236;while(true){
+main.core.task_select_view = (function task_select_view(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$96,main.core.page_state_class("hero-task-select"),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.hero_header_view,"Select Task",main.core.cancel_to_home,main.core.blank], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$97,"I Want To ..."], null),(function (){var iter__4269__auto__ = (function iter__5235(s__5236){return (new cljs.core.LazySeq(null,(function (){var s__5236__$1 = s__5236;while(true){
 var temp__4126__auto__ = cljs.core.seq(s__5236__$1);if(temp__4126__auto__)
 {var s__5236__$2 = temp__4126__auto__;if(cljs.core.chunked_seq_QMARK_(s__5236__$2))
 {var c__4267__auto__ = cljs.core.chunk_first(s__5236__$2);var size__4268__auto__ = cljs.core.count(c__4267__auto__);var b__5238 = cljs.core.chunk_buffer(size__4268__auto__);if((function (){var i__5237 = (0);while(true){
@@ -196,33 +196,62 @@ break;
 main.core.request_button_view = (function request_button_view(){return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$87,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$64,(function (){return main.core.activate_page("hero-task-select");
 })], null),"Get Started"], null);
 });
-main.core.home_feed_first_time = (function home_feed_first_time(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$97,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$98,"Worker Smarter"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$99,"Get Things Done."], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$99,"Securely, Reliably, and Quickly."], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$100,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."], null)], null);
+main.core.home_feed_first_time = (function home_feed_first_time(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$98,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$99,"Worker Smarter"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$100,"Get Things Done."], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$100,"Securely, Reliably, and Quickly."], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$101,"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."], null)], null);
 });
-main.core.home_feed_default = (function home_feed_default(){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$81,"you've been here before"], null);
+main.core.home_feed_default_item = (function home_feed_default_item(request){return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$81,"something or another",(''+cljs.core.str.cljs$core$IFn$_invoke$arity$1(request))], null);
 });
-main.core.home_feed_view = (function home_feed_view(requests){if(cljs.core.empty_QMARK_(requests))
-{return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_first_time], null);
-} else
-{return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_default], null);
+main.core.home_feed_default = (function home_feed_default(requests){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$81,(function (){var iter__4269__auto__ = (function iter__5244(s__5245){return (new cljs.core.LazySeq(null,(function (){var s__5245__$1 = s__5245;while(true){
+var temp__4126__auto__ = cljs.core.seq(s__5245__$1);if(temp__4126__auto__)
+{var s__5245__$2 = temp__4126__auto__;if(cljs.core.chunked_seq_QMARK_(s__5245__$2))
+{var c__4267__auto__ = cljs.core.chunk_first(s__5245__$2);var size__4268__auto__ = cljs.core.count(c__4267__auto__);var b__5247 = cljs.core.chunk_buffer(size__4268__auto__);if((function (){var i__5246 = (0);while(true){
+if((i__5246 < size__4268__auto__))
+{var request = cljs.core._nth.cljs$core$IFn$_invoke$arity$2(c__4267__auto__,i__5246);cljs.core.chunk_append(b__5247,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_default_item,request], null));
+{
+var G__5248 = (i__5246 + (1));
+i__5246 = G__5248;
+continue;
 }
+} else
+{return true;
+}
+break;
+}
+})())
+{return cljs.core.chunk_cons(cljs.core.chunk(b__5247),iter__5244(cljs.core.chunk_rest(s__5245__$2)));
+} else
+{return cljs.core.chunk_cons(cljs.core.chunk(b__5247),null);
+}
+} else
+{var request = cljs.core.first(s__5245__$2);return cljs.core.cons(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_default_item,request], null),iter__5244(cljs.core.rest(s__5245__$2)));
+}
+} else
+{return null;
+}
+break;
+}
+}),null,null));
+});return iter__4269__auto__(requests);
+})()], null);
 });
-main.core.home_view = (function home_view(requests){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$101,main.core.page_state_class("hero-home"),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_header_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.request_button_view], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_view,requests], null)], null);
+main.core.home_feed_view = (function home_feed_view(requests){return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_first_time], null);
 });
-main.core.app_view = (function app_view(){return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$102,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view,cljs.core.deref(main.core.requests_state)], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_select_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_match_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_detail_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_feedback_view], null)], null);
+main.core.home_view = (function home_view(requests){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$102,main.core.page_state_class("hero-home"),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_header_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.request_button_view], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_feed_view,requests], null)], null);
+});
+main.core.app_view = (function app_view(){return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$103,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view,cljs.core.deref(main.core.requests_state)], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_select_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_match_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_detail_view], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_feedback_view], null)], null);
 });
 main.core.app_boot = (function app_boot(){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["initializing pubnub"], 0));
-cljs.core.reset_BANG_(main.core.pubnub_state,PUBNUB.init(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$103,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-publish-key"),cljs.core.constant$keyword$104,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-subscribe-key"),cljs.core.constant$keyword$105,true], null))));
+cljs.core.reset_BANG_(main.core.pubnub_state,PUBNUB.init(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$104,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-publish-key"),cljs.core.constant$keyword$105,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-subscribe-key"),cljs.core.constant$keyword$106,true], null))));
 cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["subscribing to requests channel"], 0));
-cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$61,"requests",cljs.core.constant$keyword$106,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to requests channel via TLS"], 0));
+cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$61,"requests",cljs.core.constant$keyword$107,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to requests channel via TLS"], 0));
 }),cljs.core.constant$keyword$62,(function (m){return main.core.pubnub_receive_request(m);
 })], null)));
 cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["subscribing to private channel"], 0));
-cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$61,main.core.user_id,cljs.core.constant$keyword$106,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to private channel,",main.core.user_id,", via TLS"], 0));
+cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$61,main.core.user_id,cljs.core.constant$keyword$107,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to private channel,",main.core.user_id,", via TLS"], 0));
 }),cljs.core.constant$keyword$62,(function (m){return main.core.pubnub_receive_message(m);
 })], null)));
-return ajax.core.GET.cljs$core$IFn$_invoke$arity$variadic("https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors",cljs.core.array_seq([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$36,(function (status){return cljs.core.reset_BANG_(main.core.status_state,status);
+return ajax.core.GET.cljs$core$IFn$_invoke$arity$variadic("/api/requests",cljs.core.array_seq([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$36,(function (entries){return cljs.core.reset_BANG_(main.core.requests_state,entries);
 })], null)], 0));
 });
-main.core.app_view_with_callback = cljs.core.with_meta(main.core.app_view,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$107,(function (){return main.core.app_boot();
+main.core.app_view_with_callback = cljs.core.with_meta(main.core.app_view,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$108,(function (){return main.core.app_boot();
 })], null));
 reagent.core.render_component.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.app_view_with_callback], null),document.getElementById("app"));

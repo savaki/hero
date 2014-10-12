@@ -29,11 +29,9 @@
                      "hero-task-select"
                      "hero-home"]))
 
-(def task-types (atom ["new-report"
-                       "new-dashboard"
-                       "custom-report"
-                       "show-me-how"
-                       "talk-to-expert"]))
+(def task-types (atom ["Create a New Report"
+                       "Find a Screencast"
+                       "Need a Question Answered"]))
 
 ; the current request we're building
 ; fields: user-id, status, feed, provider
@@ -171,10 +169,10 @@
 
 (defn task-search-find-provider []
   [:div.hero-find-provider [:div.hero-button {:type "button"
-                                              :on-click #(task-search-find-provider-action)} "Request Hero"]])
+                                              :on-click #(task-search-find-provider-action)} "Request Provider"]])
 
 (defn task-search-show-provider [provider]
-  [:div.hero-show-provider [:div.hero-button {:type "button"} "Request Hero"]])
+  [:div.hero-show-provider [:div.hero-button {:type "button"} "Request Provider"]])
 
 (defn task-search-contents []
   (let [provider (current-request-provider)]
@@ -185,7 +183,7 @@
 (defn task-search-view []
   [:div#hero-task-search.hero-page (page-state-class "hero-task-search")
    [hero-header-view "Request Item" back-to-home blank]
-   [task-item "new-report"]
+   [task-item (get @current-request-state "request-type")]
    [task-search-contents]])
 ;   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
 
@@ -211,7 +209,8 @@
 
 (defn task-select-view []
   [:div#hero-task-select.hero-page (page-state-class "hero-task-select")
-   [hero-header-view "Request Item" cancel-to-home blank]
+   [hero-header-view "Select Task" cancel-to-home blank]
+   [:h2.select-task "I Want To ..."]
    (for [task-type @task-types] [task-select-item task-type])])
 
 ; ------------------------------------------------------------------------
@@ -250,13 +249,17 @@
    ;   [request-button-view]
    ])
 
-(defn home-feed-default []
-  [:div "you've been here before"])
+(defn home-feed-default-item [request]
+  [:div "something or another" (str request)])
+
+(defn home-feed-default [requests]
+  [:div (for [request requests]
+          [home-feed-default-item request])])
 
 (defn home-feed-view [requests]
-  (if (empty? requests)
-    [home-feed-first-time]
-    [home-feed-default]))
+  [home-feed-first-time])
+;  (if (empty? requests)
+;    [home-feed-default requests]))
 
 (defn home-view [requests]
   [:div#hero-home.hero-page (page-state-class "hero-home") [home-header-view]
@@ -266,7 +269,6 @@
 ; ------------------------------------------------------------------------
 
 (defn app-view []
-  ;  (js/setTimeout #(activate-page "hero-task-select"), 50)
   [:div.hero-app [home-view @requests-state]
    [task-select-view]
    [task-search-view]
@@ -289,8 +291,8 @@
   (.subscribe @pubnub-state (clj->js {:channel user-id,
                                       :connect #(println "Connected to private channel," user-id ", via TLS")
                                       :message (fn [m] (pubnub-receive-message m))}))
-  (ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
-    {:handler (fn [status] (reset! status-state status))}))
+  (ajax/GET "/api/requests"
+    {:handler (fn [entries] (reset! requests-state entries))}))
 
 (def app-view-with-callback
   (with-meta app-view

@@ -166,6 +166,7 @@ body, div, p, td, th, li {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+  font-weight: bold;
 }
 
 .header-header-left {
@@ -233,6 +234,12 @@ body, div, p, td, th, li {
 
 .task-select-item {
   cursor: pointer;
+}
+
+h2.select-task {
+  margin: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .task-item {
