@@ -3,19 +3,13 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/pubnub/go/messaging"
+	"github.com/savaki/hero/server/dao"
 	"log"
 )
 
 type Note struct {
 	Author  string `json:"author"`
 	Comment string `json:"comment"`
-}
-
-type Request struct {
-	Id          string `json:"id"`
-	RequestedBy string `json:"requested-by"`
-	Notes       []Note `json:"notes"`
-	TaskType    string `json:"task-type"`
 }
 
 func CreateRequest() gin.HandlerFunc {
@@ -33,18 +27,36 @@ func CreateRequest() gin.HandlerFunc {
 		}
 	}()
 
-	return func(c*gin.Context) {
-		input := Request{}
-		if c.Bind(&input) {
+	return func(c *gin.Context) {
+		request := dao.Request{}
+		if c.Bind(&request) {
 			pubnub := messaging.NewPubnub(cfg.PubNubPublishKey, cfg.PubNubSubscribeKey, cfg.PubNubSecretKey, "", true, "")
-			pubnub.Publish("request", input, callbackChannel, errorChannel)
+			pubnub.Publish("request", request, callbackChannel, errorChannel)
+
+			_, err := dao.CreateRequest(&request)
+			if err != nil {
+				Fail(c.Writer, err)
+				return
+			}
 
 			log.Println(c)
-			c.JSON(200, input)
+			c.JSON(200, request)
 		}
 	}
 }
 
 func FindAllRequests(c *gin.Context) {
-	c.JSON(200, map[string]string{"status": "ok"})
+	userId, err := c.Get(UserId)
+	if err != nil {
+		Fail(c.Writer, err)
+		return
+	}
+
+	requests, err := dao.FindAllRequest(userId.(string))
+	if err != nil {
+		Fail(c.Writer, err)
+		return
+	}
+
+	c.JSON(200, requests)
 }

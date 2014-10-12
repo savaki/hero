@@ -36,8 +36,8 @@
                        "talk-to-expert"]))
 
 ; the current request we're building
-; fields: requested-by, status, feed, provider
-(def current-request-state (atom {"requested-by" user-id
+; fields: user-id, status, feed, provider
+(def current-request-state (atom {"user-id" user-id
                                   "status" nil
                                   "task-type" nil}))
 
@@ -95,6 +95,9 @@
 (defn cancel-to-home []
   [:div.hero-cancel {:on-click #(activate-page "hero-home")} "Cancel"])
 
+(defn back-to-home []
+  [:div.hero-cancel {:on-click #(activate-page "hero-home")} "Back"])
+
 ; ------------------------------------------------------------------------
 ; reusable display elements
 
@@ -151,10 +154,9 @@
 ; ------------------------------------------------------------------------
 
 (defn clear-current-request! []
-  (swap! current-request-state "provider" nil)
-  (swap! current-request-state "task-type" nil)
-  (swap! current-request-state "status" nil)
-  (swap! current-request-state "feed" []))
+  (swap! current-request-state assoc "provider" nil)
+  (swap! current-request-state assoc "task-type" nil)
+  (swap! current-request-state assoc "status" nil))
 
 (defn task-search-find-provider-action []
   (swap! current-request-state assoc "status" "submitted")
@@ -162,8 +164,8 @@
   (ajax/POST "/api/requests"
     {:params @current-request-state
      :format :json
-     :handler (fn [result] (println result)
-                (clear-current-request!)
+     :handler (fn [result] (println "received" result)
+                (reset! current-request-state result)
                 (ajax/GET "/api/requests"
                   {:handler (fn [entries] (reset! requests-state entries))}))}))
 
@@ -182,7 +184,7 @@
 
 (defn task-search-view []
   [:div#hero-task-search.hero-page (page-state-class "hero-task-search")
-   [hero-header-view "Request Item" cancel-to-home blank]
+   [hero-header-view "Request Item" back-to-home blank]
    [task-item "new-report"]
    [task-search-contents]])
 ;   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])

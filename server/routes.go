@@ -16,7 +16,7 @@ func CreateRoutes(docroot string) *gin.Engine {
 
 	verify, authorize := AuthProvider()
 
-	routes := gin.New()
+	routes := gin.Default()
 	routes.Use(cors) // uncomment this if we use salesforce
 
 	routes.GET("/", verify, Home(docroot))
@@ -64,6 +64,7 @@ func Home(docroot string) gin.HandlerFunc {
 }
 
 func Fail(w http.ResponseWriter, err error) {
+	log.Println(err)
 	w.WriteHeader(500)
 	w.Write([]byte(err.Error()))
 }
