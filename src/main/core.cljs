@@ -33,6 +33,8 @@
                        "Find a Screencast"
                        "Need a Question Answered"]))
 
+(def seconds-elapsed (atom 0))
+
 ; the current request we're building
 ; fields: user-id, status, feed, provider
 (def current-request-state (atom {"user-id" user-id
@@ -158,6 +160,7 @@
 
 (defn task-search-find-provider-action []
   (swap! current-request-state assoc "status" "submitted")
+  (reset! seconds-elapsed 0)
   (println "finding a provider" @current-request-state)
   (ajax/POST "/api/requests"
     {:params @current-request-state
@@ -169,22 +172,51 @@
 
 (defn task-search-find-provider []
   [:div.hero-find-provider [:div.hero-button {:type "button"
-                                              :on-click #(task-search-find-provider-action)} "Request Provider"]])
+                                              :on-click #(task-search-find-provider-action)} "Find Provider"]])
 
 (defn task-search-show-provider [provider]
-  [:div.hero-show-provider [:div.hero-button {:type "button"} "Request Provider"]])
+  [:div.hero-show-provider [:div.hero-button {:type "button"} "Find Provider"]])
 
 (defn task-search-contents []
   (let [provider (current-request-provider)]
-    [:div.task-search-contents (if (empty? provider)
-                                 [task-search-find-provider]
-                                 [task-search-show-provider provider])]))
+    [:div.task-search-contents [task-search-find-provider]]))
+
+(defn task-search-view-find []
+  [:div [:h2.select-task (get @current-request-state "request-type")]
+   [:p.select-task "Find a member in the Salesforce Community who can help right now."]
+   [:br]
+   [task-search-contents]
+   [:br]
+   [:br]
+   [:p.select-task "Finding a provider is simple and easy."]
+   [:p.select-task "Talk with them about your project to make sure they're right for you."]])
+
+(defn no-provider-view []
+  [:div [:h2.select-task "Sorry, looks like there weren't any providers available at this time."]])
+
+(defn not-looking-good []
+  [:div [:h2.time-remaining-update "Hmmm."]
+   [:h2.time-remaining-update "Not looking good ..."]])
+
+(defn keep-your-fingers-crossed []
+  [:div [:h2.time-remaining-update "Fingers crossed."]])
+
+(defn task-searching-for-provider []
+  (js/setTimeout #(swap! seconds-elapsed inc) 1000)
+  (let [time-remaining (- 60 @seconds-elapsed)]
+    [:div [:h2.select-task "Searching for a provider ..."]
+     (cond (<= time-remaining 0) [no-provider-view]
+       (and (< time-remaining 58) (> time-remaining 55)) [keep-your-fingers-crossed]
+       (and (< time-remaining 12) (> time-remaining 5)) [not-looking-good]
+       :else [:div.time-remaining time-remaining])]))
 
 (defn task-search-view []
   [:div#hero-task-search.hero-page (page-state-class "hero-task-search")
    [hero-header-view "Request Item" back-to-home blank]
-   [task-item (get @current-request-state "request-type")]
-   [task-search-contents]])
+   (cond (= (get @current-request-state "status") "submitted") [:div [task-searching-for-provider]]
+     (empty? (get @current-request-state "provider")) [task-search-view-find]
+     :else [task-search-show-provider provider])])
+
 ;   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
 
 ; ------------------------------------------------------------------------
@@ -209,7 +241,7 @@
 
 (defn task-select-view []
   [:div#hero-task-select.hero-page (page-state-class "hero-task-select")
-   [hero-header-view "Select Task" cancel-to-home blank]
+   [hero-header-view "Select Work Area" cancel-to-home blank]
    [:h2.select-task "I Want To ..."]
    (for [task-type @task-types] [task-select-item task-type])])
 
@@ -222,7 +254,7 @@
 (defn home-feed-first-time []
   [:div.newbie [:h1 "Worker Smarter"]
    [:h2 "Get Things Done."]
-   [:h2 "Securely, Reliably, and Quickly."]
+   [:h2 "Securely, Reliably, Quickly."]
    [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."]
 
    ;   [:div.newbie-step-container [:div.new-step-item [:p "do this"]]
