@@ -14,11 +14,17 @@ func CreateRoutes(docroot string) *gin.Engine {
 		c.Writer.Header().Add("access-control-allow-methods", "GET,HEAD,POST,DELETE,OPTIONS,PUT,PATCH")
 	}
 
+	verify, authorize := AuthProvider()
+
 	routes := gin.New()
 	routes.Use(cors)
-	routes.GET("/", Home(docroot))
+
+	routes.GET("/", verify, Home(docroot))
+	routes.GET("/salesforce/callback", authorize)
+
 	routes.GET("/check/redis", CheckRedis)
 	routes.GET("/check/cors", CheckCors)
+
 	routes.Static("/js", docroot+"/js")
 	routes.Static("/dev", docroot+"/dev")
 	routes.Static("/styles", docroot+"/styles")

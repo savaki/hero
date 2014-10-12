@@ -6,6 +6,11 @@
 	],
 	"Deps": [
 		{
+			"ImportPath": "github.com/boj/redistore",
+			"Comment": "v1",
+			"Rev": "9d1554b400d726c7aa54b6e4a836f273b72b97f7"
+		},
+		{
 			"ImportPath": "github.com/codegangsta/cli",
 			"Comment": "1.2.0-16-gaa19913",
 			"Rev": "aa19913be3107ab75ea67a5a88d667d62a69dbbd"
@@ -20,8 +25,24 @@
 			"Rev": "3b079bb6f79ae501e73a5401c41b589f6616b61e"
 		},
 		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "708054d61e5a2918b9f4e9700000ee611dcf03f5"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Rev": "155134204c034796bcd7a72c1e1b53ba005735c6"
+		},
+		{
+			"ImportPath": "github.com/gorilla/sessions",
+			"Rev": "aa5e036e6c44aec69a32eb41097001978b29ad31"
+		},
+		{
 			"ImportPath": "github.com/julienschmidt/httprouter",
 			"Rev": "46807412fe50aaceb73bb57061c2230fd26a1640"
+		},
+		{
+			"ImportPath": "github.com/savaki/salesforce-oauth",
+			"Rev": "bddb4e95b681532468b6c7dcf993c98a85b02eae"
 		},
 		{
 			"ImportPath": "github.com/soveran/redisurl",
