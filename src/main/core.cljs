@@ -97,28 +97,28 @@
    [:h2 "Securely, Reliably, and Quickly."]
    [:p "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."]
 
-   [:div.newbie-step-container [:div.new-step-item [:p "do this"]]
-    [:div.new-step-item "and this"]
-    [:div.new-step-item "and you're done"]]
-
-   [:div.newbie-step-container [:div.new-step-item [:h3 "We Do"]
-                                [:ul [:li "Make Reports"]
-                                 [:li "Make Dashboards"]
-                                 [:li "Teach You How"]]]
-    [:div.new-step-item [:h3 "So That You Can"]
-     [:ul [:li "Be The Hero"]
-      [:li "Accomplish Amazing Things"]
-      [:li "Get The Most From Salesforce"]]]]
-
-   [:h1.why-salesforce-hero "Why Salesforce Hero"]
-   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item [:h3 "Validation #1"]]
-    [:div.new-step-item [:h3 "Validation #2"]]
-    [:div.new-step-item [:h3 "Validation #3"]]
-    [:div.new-step-item [:h3 "Validation #4"]]]
-
-   [:div "Meet Matt"]
-   [:h2 "Ready to Start"]
-   [request-button-view]
+;   [:div.newbie-step-container [:div.new-step-item [:p "do this"]]
+;    [:div.new-step-item "and this"]
+;    [:div.new-step-item "and you're done"]]
+;
+;   [:div.newbie-step-container [:div.new-step-item [:h3 "We Do"]
+;                                [:ul [:li "Make Reports"]
+;                                 [:li "Make Dashboards"]
+;                                 [:li "Teach You How"]]]
+;    [:div.new-step-item [:h3 "So That You Can"]
+;     [:ul [:li "Be The Hero"]
+;      [:li "Accomplish Amazing Things"]
+;      [:li "Get The Most From Salesforce"]]]]
+;
+;   [:h1.why-salesforce-hero "Why Salesforce Hero"]
+;   [:div.newbie-step-container {:class "clearfix"} [:div.new-step-item [:h3 "Validation #1"]]
+;    [:div.new-step-item [:h3 "Validation #2"]]
+;    [:div.new-step-item [:h3 "Validation #3"]]
+;    [:div.new-step-item [:h3 "Validation #4"]]]
+;
+;   [:div "Meet Matt"]
+;   [:h2 "Ready to Start"]
+;   [request-button-view]
    ])
 
 (defn home-feed-default []
