@@ -13,6 +13,7 @@ type Config struct {
 	UserId             string
 	PubNubPublishKey   string
 	PubNubSubscribeKey string
+	PubNubSecretKey    string
 }
 
 var cfg *Config
@@ -27,6 +28,7 @@ func init() {
 		IsProduction:       strings.ToLower(os.Getenv("MODE")) == "production",
 		PubNubPublishKey:   os.Getenv("PUBNUB_PUBLISH_KEY"),
 		PubNubSubscribeKey: os.Getenv("PUBNUB_SUBSCRIBE_KEY"),
+		PubNubSecretKey:    os.Getenv("PUBNUB_SECRET_KEY"),
 	}
 }
 

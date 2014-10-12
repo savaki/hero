@@ -21,7 +21,7 @@ func CreateRoutes(docroot string) *gin.Engine {
 
 	routes.GET("/", verify, Home(docroot))
 	routes.GET("/salesforce/callback", authorize)
-	routes.POST("/api/requests", verify, CreateRequest)
+	routes.POST("/api/requests", verify, CreateRequest())
 	routes.GET("/api/requests", verify, FindAllRequests)
 
 	routes.GET("/check/redis", CheckRedis)
