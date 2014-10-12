@@ -58,6 +58,11 @@
    [:h1 "patiently waiting for our wits to grow sharper."]
    [:h3 "... waiting for our Hero to arrive"]])
 
+(defn home-view-waiting [requests]
+  [:div.starter-template [:h1 "Someone approaches in need of help."]
+   [:div {:style {:text-align "center"
+                  :margin-top "50px"}} [:div {:class "btn btn-primary"} "Offer Assistance"]]])
+
 (defn home-view-request-content [request]
   (let [request-type (get request "request-type")]
     (cond (= request-type "new-report") "A Salesforce subscriber needs help creating a new report."
@@ -70,7 +75,6 @@
    [:span (home-view-request-content request)]
    [:input {:type "button"
             :class "btn btn-primary"
-            :on-click #(ajax/POST)
             :value "Provide Help"}]])
 
 (defn home-view-requests [requests]
@@ -81,7 +85,7 @@
 (defn home-view [requests]
   (if (empty? requests)
     [home-view-empty]
-    [home-view-requests requests]))
+    [home-view-waiting requests]))
 
 ; ------------------------------------------------------------------------
 

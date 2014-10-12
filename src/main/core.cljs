@@ -202,14 +202,19 @@
 (defn keep-your-fingers-crossed []
   [:div [:h2.time-remaining-update "Fingers crossed."]])
 
+(defn countdown []
+  (swap! seconds-elapsed inc)
+  (js/setTimeout #(countdown) 1000))
+
 (defn task-searching-for-provider []
-  (let [time-remaining (- 60 @seconds-elapsed)]
-    (js/setTimeout #(swap! seconds-elapsed inc) 1000)
-    [:div [:h2.select-task "Searching for a provider ..."]
-     (cond (<= time-remaining 0) [no-provider-view]
-       (and (< time-remaining 58) (> time-remaining 55)) [keep-your-fingers-crossed]
-       (and (< time-remaining 12) (> time-remaining 5)) [not-looking-good]
-       :else [:div.time-remaining time-remaining])]))
+  (countdown)
+  (fn []
+    (let [time-remaining (- 60 @seconds-elapsed)]
+      [:div [:h2.select-task "Searching for a provider ..."]
+       (cond (<= time-remaining 0) [no-provider-view]
+         (and (< time-remaining 58) (> time-remaining 55)) [keep-your-fingers-crossed]
+         (and (< time-remaining 12) (> time-remaining 5)) [not-looking-good]
+         :else [:div.time-remaining time-remaining])])))
 
 (defn task-search-view []
   [:div#hero-task-search.hero-page (page-state-class "hero-task-search")

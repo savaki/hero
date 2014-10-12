@@ -33,6 +33,8 @@ main.core.pubnub_receive_message = (function pubnub_receive_message(message){ret
 });
 main.core.home_view_empty = (function home_view_empty(){return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$62,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$63,"The world is full of magical things"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$63,"patiently waiting for our wits to grow sharper."], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$64,"... waiting for our Hero to arrive"], null)], null);
 });
+main.core.home_view_waiting = (function home_view_waiting(requests){return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$62,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$63,"Someone approaches in need of help."], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$65,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$45,new cljs.core.PersistentArrayMap(null, 2, [cljs.core.constant$keyword$66,"center",cljs.core.constant$keyword$67,"50px"], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$65,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$44,"btn btn-primary"], null),"Offer Assistance"], null)], null)], null);
+});
 main.core.home_view_request_content = (function home_view_request_content(request){var request_type = cljs.core.get.cljs$core$IFn$_invoke$arity$2(request,"request-type");if(cljs.core._EQ_.cljs$core$IFn$_invoke$arity$2(request_type,"new-report"))
 {return "A Salesforce subscriber needs help creating a new report.";
 } else
@@ -48,11 +50,10 @@ main.core.home_view_request_content = (function home_view_request_content(reques
 }
 });
 main.core.home_view_request = (function home_view_request(request){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq([request], 0));
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$65,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$44,"bs-callout bs-callout-info"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$66,main.core.home_view_request_content(request)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$67,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.constant$keyword$68,"button",cljs.core.constant$keyword$44,"btn btn-primary",cljs.core.constant$keyword$69,(function (){return ajax.core.POST();
-}),cljs.core.constant$keyword$70,"Provide Help"], null)], null)], null);
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$68,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$44,"bs-callout bs-callout-info"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$69,main.core.home_view_request_content(request)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$70,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$71,"button",cljs.core.constant$keyword$44,"btn btn-primary",cljs.core.constant$keyword$72,"Provide Help"], null)], null)], null);
 });
 main.core.home_view_requests = (function home_view_requests(requests){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["rendering home-view-requests",requests], 0));
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$71,(function (){var iter__4269__auto__ = (function iter__5205(s__5206){return (new cljs.core.LazySeq(null,(function (){var s__5206__$1 = s__5206;while(true){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$65,(function (){var iter__4269__auto__ = (function iter__5205(s__5206){return (new cljs.core.LazySeq(null,(function (){var s__5206__$1 = s__5206;while(true){
 var temp__4126__auto__ = cljs.core.seq(s__5206__$1);if(temp__4126__auto__)
 {var s__5206__$2 = temp__4126__auto__;if(cljs.core.chunked_seq_QMARK_(s__5206__$2))
 {var c__4267__auto__ = cljs.core.chunk_first(s__5206__$2);var size__4268__auto__ = cljs.core.count(c__4267__auto__);var b__5208 = cljs.core.chunk_buffer(size__4268__auto__);if((function (){var i__5207 = (0);while(true){
@@ -88,10 +89,10 @@ break;
 main.core.home_view = (function home_view(requests){if(cljs.core.empty_QMARK_(requests))
 {return new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view_empty], null);
 } else
-{return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view_requests,requests], null);
+{return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view_waiting,requests], null);
 }
 });
-main.core.app_view = (function app_view(){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$72,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view,cljs.core.deref(main.core.requests_state)], null)], null);
+main.core.app_view = (function app_view(){return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$73,new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.home_view,cljs.core.deref(main.core.requests_state)], null)], null);
 });
 main.core.update_requests = (function update_requests(){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["updating requests"], 0));
 return ajax.core.GET.cljs$core$IFn$_invoke$arity$variadic("/api/requests/open",cljs.core.array_seq([new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$36,(function (val){return cljs.core.reset_BANG_(main.core.requests_state,val);
@@ -102,17 +103,17 @@ return setTimeout((function (){return update_requests_forever();
 }),(5000));
 });
 main.core.app_boot = (function app_boot(){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["initializing pubnub"], 0));
-cljs.core.reset_BANG_(main.core.pubnub_state,PUBNUB.init(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$73,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-publish-key"),cljs.core.constant$keyword$74,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-subscribe-key"),cljs.core.constant$keyword$75,true], null))));
+cljs.core.reset_BANG_(main.core.pubnub_state,PUBNUB.init(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$74,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-publish-key"),cljs.core.constant$keyword$75,cljs.core.get_in.cljs$core$IFn$_invoke$arity$2(main.core.keys_state,"pubnub-subscribe-key"),cljs.core.constant$keyword$76,true], null))));
 cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["subscribing to requests channel"], 0));
-cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$60,"requests",cljs.core.constant$keyword$76,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to requests channel via TLS"], 0));
+cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$60,"requests",cljs.core.constant$keyword$77,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to requests channel via TLS"], 0));
 }),cljs.core.constant$keyword$61,(function (m){return main.core.pubnub_receive_request(m);
 })], null)));
 cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["subscribing to private channel"], 0));
-cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$60,main.core.user_id,cljs.core.constant$keyword$76,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to private channel,",main.core.user_id,", via TLS"], 0));
+cljs.core.deref(main.core.pubnub_state).subscribe(cljs.core.clj__GT_js(new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$60,main.core.user_id,cljs.core.constant$keyword$77,(function (){return cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["Connected to private channel,",main.core.user_id,", via TLS"], 0));
 }),cljs.core.constant$keyword$61,(function (m){return main.core.pubnub_receive_message(m);
 })], null)));
 return main.core.update_requests_forever();
 });
-main.core.app_view_with_callback = cljs.core.with_meta(main.core.app_view,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$77,(function (){return main.core.app_boot();
+main.core.app_view_with_callback = cljs.core.with_meta(main.core.app_view,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.constant$keyword$78,(function (){return main.core.app_boot();
 })], null));
 reagent.core.render_component.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.app_view_with_callback], null),document.getElementById("app"));

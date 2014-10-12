@@ -9422,31 +9422,35 @@ function dn() {
 function en() {
   return new Y(null, 2, 5, Z, [Ti, new Y(null, 2, 5, Z, [Ej, "Fingers crossed."], null)], null);
 }
-function fn() {
-  var a = 60 - Fd(Hm);
-  setTimeout(function() {
-    return function() {
-      return Jh.a(Hm, ze);
-    };
-  }(a), 1E3);
-  return new Y(null, 3, 5, Z, [Ti, new Y(null, 2, 5, Z, [uj, "Searching for a provider ..."], null), 0 >= a ? new Y(null, 1, 5, Z, [cn], null) : 58 > a && 55 < a ? new Y(null, 1, 5, Z, [en], null) : 12 > a && 5 < a ? new Y(null, 1, 5, Z, [dn], null) : u ? new Y(null, 2, 5, Z, [Fi, a], null) : null], null);
+var gn = function fn() {
+  Jh.a(Hm, ze);
+  return setTimeout(function() {
+    return fn();
+  }, 1E3);
+};
+function hn() {
+  gn();
+  return function() {
+    var a = 60 - Fd(Hm);
+    return new Y(null, 3, 5, Z, [Ti, new Y(null, 2, 5, Z, [uj, "Searching for a provider ..."], null), 0 >= a ? new Y(null, 1, 5, Z, [cn], null) : 58 > a && 55 < a ? new Y(null, 1, 5, Z, [en], null) : 12 > a && 5 < a ? new Y(null, 1, 5, Z, [dn], null) : u ? new Y(null, 2, 5, Z, [Fi, a], null) : null], null);
+  };
 }
-function gn() {
-  return new Y(null, 4, 5, Z, [$i, Lm("hero-task-search"), new Y(null, 4, 5, Z, [Rm, "Request Item", Pm, Um], null), E.a(T.a(Fd(Im), "status"), "submitted") ? new Y(null, 2, 5, Z, [Ti, new Y(null, 1, 5, Z, [fn], null)], null) : Qe(T.a(Fd(Im), "provider")) ? new Y(null, 1, 5, Z, [bn], null) : u ? new Y(null, 2, 5, Z, [$m, zm.Od], null) : null], null);
+function jn() {
+  return new Y(null, 4, 5, Z, [$i, Lm("hero-task-search"), new Y(null, 4, 5, Z, [Rm, "Request Item", Pm, Um], null), E.a(T.a(Fd(Im), "status"), "submitted") ? new Y(null, 2, 5, Z, [Ti, new Y(null, 1, 5, Z, [hn], null)], null) : Qe(T.a(Fd(Im), "provider")) ? new Y(null, 1, 5, Z, [bn], null) : u ? new Y(null, 2, 5, Z, [$m, zm.Od], null) : null], null);
 }
-function hn(a) {
+function kn(a) {
   Ch.d(N(["selected task type, ", a], 0));
   setTimeout(function() {
     return Jh.k(Im, U, "request-type", a);
   });
   return Nm("hero-task-search");
 }
-function jn(a) {
+function ln(a) {
   return new Y(null, 3, 5, Z, [pj, new q(null, 1, [Ki, function() {
-    return hn(a);
+    return kn(a);
   }], null), new Y(null, 2, 5, Z, [Sm, a], null)], null);
 }
-function kn() {
+function mn() {
   return new Y(null, 5, 5, Z, [ni, Lm("hero-task-select"), new Y(null, 4, 5, Z, [Rm, "Select Work Area", Om, Um], null), new Y(null, 2, 5, Z, [uj, "I Want To ..."], null), function() {
     return function b(c) {
       return new tf(null, function() {
@@ -9459,7 +9463,7 @@ function kn() {
                 for (var k = 0;;) {
                   if (k < f) {
                     var l = z.a(e, k);
-                    g.add(new Y(null, 2, 5, Z, [jn, l], null));
+                    g.add(new Y(null, 2, 5, Z, [ln, l], null));
                     k += 1;
                   } else {
                     e = !0;
@@ -9471,7 +9475,7 @@ function kn() {
               return e ? zf(g.aa(), b(de(d))) : zf(g.aa(), null);
             }
             g = I(d);
-            return P(new Y(null, 2, 5, Z, [jn, g], null), b(J(d)));
+            return P(new Y(null, 2, 5, Z, [ln, g], null), b(J(d)));
           }
           return null;
         }
@@ -9479,21 +9483,21 @@ function kn() {
     }(Fd(Gm));
   }()], null);
 }
-function ln() {
+function nn() {
   return new Y(null, 3, 5, Z, [mj, new q(null, 1, [Ki, function() {
     return Nm("hero-task-select");
   }], null), "Get Started"], null);
 }
-function mn() {
+function on() {
   return new Y(null, 5, 5, Z, [hi, new Y(null, 2, 5, Z, [vj, "Worker Smarter"], null), new Y(null, 2, 5, Z, [jj, "Get Things Done."], null), new Y(null, 2, 5, Z, [jj, "Securely, Reliably, Quickly."], null), new Y(null, 2, 5, Z, [Dj, "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis."], null)], null);
 }
-function nn() {
-  return new Y(null, 1, 5, Z, [mn], null);
-}
-function on(a) {
-  return new Y(null, 5, 5, Z, [Gi, Lm("hero-home"), new Y(null, 1, 5, Z, [Qm], null), new Y(null, 1, 5, Z, [ln], null), new Y(null, 2, 5, Z, [nn, a], null)], null);
-}
 function pn() {
+  return new Y(null, 1, 5, Z, [on], null);
+}
+function qn(a) {
+  return new Y(null, 5, 5, Z, [Gi, Lm("hero-home"), new Y(null, 1, 5, Z, [Qm], null), new Y(null, 1, 5, Z, [nn], null), new Y(null, 2, 5, Z, [pn, a], null)], null);
+}
+function rn() {
   Ch.d(N(["initializing pubnub"], 0));
   Ih(Km, hb(PUBNUB, Ph(new q(null, 3, [wj, Qf.a(Bm, "pubnub-publish-key"), ci, Qf.a(Bm, "pubnub-subscribe-key"), di, !0], null))));
   Ch.d(N(["subscribing to requests channel"], 0));
@@ -9512,11 +9516,11 @@ function pn() {
     return Ih(Jm, a);
   }], null)], 0));
 }
-var qn = Oe(function() {
-  return new Y(null, 7, 5, Z, [ai, new Y(null, 2, 5, Z, [on, Fd(Jm)], null), new Y(null, 1, 5, Z, [kn], null), new Y(null, 1, 5, Z, [gn], null), new Y(null, 1, 5, Z, [Xm], null), new Y(null, 1, 5, Z, [Wm], null), new Y(null, 1, 5, Z, [Vm], null)], null);
+var sn = Oe(function() {
+  return new Y(null, 7, 5, Z, [ai, new Y(null, 2, 5, Z, [qn, Fd(Jm)], null), new Y(null, 1, 5, Z, [mn], null), new Y(null, 1, 5, Z, [jn], null), new Y(null, 1, 5, Z, [Xm], null), new Y(null, 1, 5, Z, [Wm], null), new Y(null, 1, 5, Z, [Vm], null)], null);
 }, new q(null, 1, [Bi, function() {
-  return pn();
+  return rn();
 }], null));
-xm.a(new Y(null, 1, 5, Z, [qn], null), document.getElementById("app"));
+xm.a(new Y(null, 1, 5, Z, [sn], null), document.getElementById("app"));
 
 })();
