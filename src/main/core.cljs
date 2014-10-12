@@ -44,10 +44,15 @@
 ; reusable display elements
 
 (defn home-header-view []
-  [:div.hero-home-header [:div.hero-container [:div.hero-avatar {:class "more"} "pic here"]
-                          [:div.hero-title {:class "clearfix"}
-                           [:div.hero-app-name "Salesforce Hero"]
-                           [:div.hero-tagline "Get Things Done"]]]])
+  [:div.hero-header-home [:div.hero-avatar {:class "more"} "pic here"]
+   [:div.hero-title {:class "clearfix"}
+    [:div.hero-app-name "Salesforce Hero"]
+    [:div.hero-tagline "Get Things Done"]]])
+
+(defn hero-header-view {:class "clearfix"} [title left-component right-component]
+  [:div.hero-header [:div.header-header-left [left-component]]
+   [:div.header-header-right [right-component]]
+   [:div.header-header-title [:h3 title]]])
 
 (defn task-item [task-type]
   [:div.task-item [:div.task-image]
@@ -55,6 +60,12 @@
 
 (defn partner-item [partner-item]
   [:div.partner-item "I will be the partner"])
+
+(defn noop []
+  [:span "no-op"])
+
+(defn blank []
+  [:span ""])
 
 ; ------------------------------------------------------------------------
 
@@ -89,7 +100,7 @@
    [task-item task-type]])
 
 (defn task-select-view []
-  [:div#hero-task-select.hero-page
+  [:div#hero-task-select.hero-page [hero-header-view "Request Item" noop noop]
    (for [task-type @task-types] [task-select-item task-type])])
 
 ; ------------------------------------------------------------------------
@@ -144,6 +155,7 @@
 ; ------------------------------------------------------------------------
 
 (defn app-view []
+  (js/setTimeout #(activate-page "hero-task-select"), 50)
   [:div.hero-app [home-view @requests-state]
    [task-select-view]
    [task-search-view]

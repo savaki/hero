@@ -82,7 +82,7 @@ table {
 /*------------------------------------------------------------------*/
 
 body {
-  background-color: #f9fbfc;
+  background-color: #f0f1f2;
   overflow-x: hidden;
 }
 
@@ -156,7 +156,22 @@ body, div, p, td, th, li {
 
 /*------------------------------------------------------------------*/
 
-.hero-home-header {
+.hero-header {
+  padding: 22px;
+  height: 28px;
+  text-align: center;
+  border-bottom: 1px solid #dadee2;
+}
+
+.header-header-left {
+  float: left;
+}
+
+.header-header-right {
+  float: right;
+}
+
+.hero-header-home {
   padding: 18px;
   height: 70px;
   background-color: #344A5F;
@@ -214,8 +229,17 @@ body, div, p, td, th, li {
 }
 
 .task-item {
-  border: 1px solid blue;
-  width: 90%;
-  margin: 5px auto 5px auto;
-  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #dfe0e1;
+  border-radius: 5px;
+  color: #5C7995;
+  cursor: pointer;
+  font-family: Proxima Nova Soft W03 Medium, arial, helvetica, sans-serif;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: center;
 }
