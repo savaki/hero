@@ -12,10 +12,16 @@
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
                         :compiler {:optimizations :none
-                                   :output-to "public/js/app.js"
-                                   :output-dir "public/js/"
+                                   :output-to "../public/provider/dev/app.js"
+                                   :output-dir "../public/provider/dev/"
                                    :pretty-print true
                                    :source-map true}}
+                       {:id "prod"
+                        :source-paths ["src"]
+                        :compiler {:optimizations :advanced
+                                   :output-to "../public/provider/js/app.js"
+                                   :output-dir "../public/provider/js/"
+                                   :pretty-print true}}
                        ]}
 
   :min-lein-version "2.0.0")

@@ -1,0 +1,253 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*------------------------------------------------------------------*/
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+/* close commented backslash hack */
+
+/*------------------------------------------------------------------*/
+
+body {
+  background-color: #f0f1f2;
+  overflow-x: hidden;
+}
+
+body, div, p, td, th, li {
+  font-family: Proxima Nova Soft W03 Reg, arial, helvetica, sans-serif;
+  font-size: 16px;
+  position: relative;
+}
+
+.hero-page {
+  visibility: hidden;
+  position: absolute;
+}
+
+.hero-page.hero-active {
+  visibility: visible;
+  position: relative;
+}
+
+/*------------------------------------------------------------------*/
+
+.newbie {
+  margin-top: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.newbie h1 {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.newbie h1.why-salesforce-hero {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.newbie h2 {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.newbie h3 {
+  font-size: 16px;
+}
+
+.newbie p:first-of-type {
+  margin-top: 20px;
+}
+
+.newbie p {
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.newbie li {
+  list-style: disc;
+}
+
+.new-step-item {
+  height: 75px;
+  width: 25%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+/*------------------------------------------------------------------*/
+
+.hero-header {
+  padding: 22px;
+  text-align: center;
+  border-bottom: 1px solid #dadee2;
+}
+
+.header-header-title {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-header-left {
+  cursor: pointer;
+  float: left;
+}
+
+.header-header-right {
+  cursor: pointer;
+  float: right;
+}
+
+.hero-header-home {
+  padding: 18px;
+  height: 70px;
+  background-color: #344A5F;
+  color: white;
+}
+
+.hero-avatar {
+  width: 64px;
+  height: 64px;
+  margin: 5px auto;
+  border-radius: 5px;
+  background-color: #ffffff;
+  float: left;
+}
+
+.hero-title {
+  float: left;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 8px;
+}
+
+.hero-app-name {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.hero-tagline {
+  margin-top: 5px;
+  font-size: 18px;
+}
+
+.hero-button {
+  background-color: #ffffff;
+  border: 1px solid #dfe0e1;
+  border-radius: 5px;
+  color: #5C7995;
+  cursor: pointer;
+  font-family: Proxima Nova Soft W03 Medium, arial, helvetica, sans-serif;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: center;
+}
+
+/*------------------------------------------------------------------*/
+
+.task-select-item {
+  cursor: pointer;
+}
+
+.task-item {
+  background-color: #ffffff;
+  border: 1px solid #dfe0e1;
+  border-radius: 5px;
+  color: #5C7995;
+  cursor: pointer;
+  font-family: Proxima Nova Soft W03 Medium, arial, helvetica, sans-serif;
+  font-size: 22px;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 30px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-align: center;
+}
+

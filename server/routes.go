@@ -19,7 +19,8 @@ func CreateRoutes(docroot string) *gin.Engine {
 	routes := gin.Default()
 	routes.Use(cors) // uncomment this if we use salesforce
 
-	routes.GET("/", verify, Home(docroot))
+	routes.GET("/", verify, Page(docroot, "/index.html"))
+	routes.GET("/provider/", verify, Page(docroot, "/provider/index.html"))
 	routes.GET("/salesforce/callback", authorize)
 	routes.POST("/api/requests", verify, CreateRequest())
 	routes.GET("/api/requests", verify, FindAllRequests)
@@ -27,6 +28,8 @@ func CreateRoutes(docroot string) *gin.Engine {
 	routes.GET("/check/redis", CheckRedis)
 	routes.GET("/check/cors", CheckCors)
 
+	routes.Static("/provider/js", docroot+"/provider/js")
+	routes.Static("/provider/dev", docroot+"/provider/dev")
 	routes.Static("/js", docroot+"/js")
 	routes.Static("/dev", docroot+"/dev")
 	routes.Static("/styles", docroot+"/styles")
@@ -39,13 +42,13 @@ func LoadTemplate(docroot, path string) *template.Template {
 	return template.Must(template.ParseFiles(docroot + path))
 }
 
-func Home(docroot string) gin.HandlerFunc {
-	home := LoadTemplate(docroot, "/index.html")
+func Page(docroot, path string) gin.HandlerFunc {
+	home := LoadTemplate(docroot, path)
 
 	return func(c *gin.Context) {
 		if !cfg.IsProduction {
 			// in development mode reload the template
-			home = LoadTemplate(docroot, "/index.html")
+			home = LoadTemplate(docroot, path)
 		}
 
 		userId, err := c.Get(UserId)

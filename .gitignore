@@ -15,5 +15,6 @@
 
 # ignore development files
 /public/dev
+/public/provider/dev
 
 
