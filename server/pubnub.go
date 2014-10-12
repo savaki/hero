@@ -60,3 +60,13 @@ func FindAllRequests(c *gin.Context) {
 
 	c.JSON(200, requests)
 }
+
+func FindOpenRequests(c *gin.Context) {
+	requests, err := dao.FindOpenRequests()
+	if err != nil {
+		Fail(c.Writer, err)
+		return
+	}
+
+	c.JSON(200, requests)
+}

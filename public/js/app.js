@@ -9411,7 +9411,7 @@ function Wm() {
 function Xm(a) {
   Ch.d(N(["selected task type, ", a], 0));
   setTimeout(function() {
-    return Jh.k(Cm, U, "task-type", a);
+    return Jh.k(Cm, U, "request-type", a);
   });
   return Hm("hero-task-search");
 }

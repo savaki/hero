@@ -141,8 +141,8 @@ main.core.task_search_contents = (function task_search_contents(){var provider =
 });
 main.core.task_search_view = (function task_search_view(){return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.constant$keyword$91,main.core.page_state_class("hero-task-search"),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.hero_header_view,"Request Item",main.core.back_to_home,main.core.blank], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_item,"new-report"], null),new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [main.core.task_search_contents], null)], null);
 });
-main.core.select_task_type = (function select_task_type(task_type){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["selected task type, ",task_type], 0));
-setTimeout((function (){return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(main.core.current_request_state,cljs.core.assoc,"task-type",task_type);
+main.core.select_task_type = (function select_task_type(request_type){cljs.core.println.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq(["selected task type, ",request_type], 0));
+setTimeout((function (){return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$4(main.core.current_request_state,cljs.core.assoc,"request-type",request_type);
 }));
 return main.core.activate_page("hero-task-search");
 });

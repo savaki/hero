@@ -191,9 +191,9 @@
 
 ; ------------------------------------------------------------------------
 
-(defn select-task-type [task-type]
-  (println "selected task type, " task-type)
-  (js/setTimeout #(swap! current-request-state assoc "task-type" task-type))
+(defn select-task-type [request-type]
+  (println "selected task type, " request-type)
+  (js/setTimeout #(swap! current-request-state assoc "request-type" request-type))
   (activate-page "hero-task-search"))
 
 (defn task-select-item [task-type]

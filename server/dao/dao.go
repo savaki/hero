@@ -18,11 +18,13 @@ func Open() (*sql.DB, error) {
 }
 
 type Request struct {
-	Id         string    `json:"id"          db:"id"`
-	UserId     string    `json:"user-id"     db:"user_id"`
-	ProviderId string    `json:"provider-id" db:"provider_id"`
-	Status     string    `json:"status"      db:"status"`
-	CreatedAt  time.Time `json:"created-at"  db:"created_at"`
+	Id           string    `json:"id"           db:"id"`
+	UserId       string    `json:"user-id"      db:"user_id"`
+	ProviderId   string    `json:"provider-id"  db:"provider_id"`
+	Status       string    `json:"status"       db:"status"`
+	RequestType *string    `json:"request-type" db:"request_type"`
+	Description *string    `json:"description"  db:"description"`
+	CreatedAt    time.Time `json:"created-at"   db:"created_at"`
 }
 
 func CreateRequest(request *Request) (string, error) {
@@ -38,10 +40,10 @@ func CreateRequest(request *Request) (string, error) {
 
 	_, err = db.Exec(`
 		insert into requests 
-			(id, user_id, provider_id, status, created_at) 
+			(id, user_id, provider_id, status, created_at, request_type, description)
 		values 
-			($1, $2, $3, $4, $5)`,
-		request.Id, request.UserId, request.ProviderId, request.Status, request.CreatedAt)
+			($1, $2, $3, $4, $5, $6, $7)`,
+		request.Id, request.UserId, request.ProviderId, request.Status, request.CreatedAt, request.RequestType, request.Description)
 	return id, err
 }
 
@@ -56,6 +58,18 @@ func UpdateRequest(request *Request) error {
 	return err
 }
 
+func FindOpenRequests() ([]Request, error) {
+	db, err := sqlx.Open("postgres", dataSourceName)
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
+
+	requests := []Request{}
+	err = db.Select(&requests, "select id, user_id, provider_id, status, created_at, request_type, description from requests where status = 'submitted' order by created_at desc limit 5")
+	return requests, err
+}
+
 func FindAllRequest(userId string) ([]Request, error) {
 	db, err := sqlx.Open("postgres", dataSourceName)
 	if err != nil {
@@ -64,7 +78,7 @@ func FindAllRequest(userId string) ([]Request, error) {
 	defer db.Close()
 
 	requests := []Request{}
-	err = db.Select(&requests, "select id, user_id, provider_id, status, created_at from requests where user_id = $1 order by created_at desc", userId)
+	err = db.Select(&requests, "select id, user_id, provider_id, status, created_at, request_type, description from requests where user_id = $1 order by created_at desc", userId)
 	return requests, err
 }
 
