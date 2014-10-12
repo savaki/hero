@@ -7,8 +7,8 @@
         content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-  <link rel="stylesheet" type="text/css" href="/styles/provider.css">
-  <link rel="stylesheet" type="text/css" href="//fast.fonts.net/cssapi/1341617c-2908-4a91-9f2f-737b9df7c4dc.css"/>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <script type="text/javascript" language="JavaScript">
     var Hero = {
       Id: '{{.UserId}}',
@@ -18,14 +18,33 @@
   </script>
 </head>
 <body>
+
 <div class="container">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand active" href="#">Salesforce Hero</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <!--<li class="active"><a href="#">Home</a></li>-->
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+<div class="container" style="margin-top: 50px">
   <div id="app"></div>
 </div>
-<div id="request-button"></div>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.11.2/react.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/velocity/1.1.0/velocity.ui.min.js"></script>
 <script src=//cdn.pubnub.com/pubnub-3.6.7.min.js></script>
 {{if .IsProduction}}
 <script src="js/app.js" type="text/javascript"></script>
@@ -34,6 +53,7 @@
 <script src="dev/app.js" type="text/javascript"></script>
 <script type="text/javascript">goog.require("main.core");</script>
 {{end}}
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>
 
