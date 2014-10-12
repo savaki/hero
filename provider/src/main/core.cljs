@@ -55,7 +55,7 @@
 
 (defn home-view-empty []
   [:div.starter-template [:h1 "The world is full of magical things"]
-   [:h1 "patiently waiting for our wits to grow sharper."]
+   [:h1 "patiently waiting for our wits to grow sharper -- Yeats"]
    [:h3 "... waiting for our Hero to arrive"]])
 
 (defn offer-assistance [request]

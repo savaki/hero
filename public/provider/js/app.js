@@ -9302,7 +9302,7 @@ Wl.b(Gg);
 Wl.b("hero-home");
 var am = Wl.b(ig), bm = Wl.b(null);
 function cm() {
-  return new Y(null, 4, 5, Z, [bi, new Y(null, 2, 5, Z, [dj, "The world is full of magical things"], null), new Y(null, 2, 5, Z, [dj, "patiently waiting for our wits to grow sharper."], null), new Y(null, 2, 5, Z, [fj, "... waiting for our Hero to arrive"], null)], null);
+  return new Y(null, 4, 5, Z, [bi, new Y(null, 2, 5, Z, [dj, "The world is full of magical things"], null), new Y(null, 2, 5, Z, [dj, "patiently waiting for our wits to grow sharper -- Yeats"], null), new Y(null, 2, 5, Z, [fj, "... waiting for our Hero to arrive"], null)], null);
 }
 function dm(a) {
   return new Y(null, 3, 5, Z, [bi, new Y(null, 2, 5, Z, [dj, "Someone approaches in need of help."], null), new Y(null, 3, 5, Z, [Pi, new r(null, 1, [Ni, new r(null, 2, [ki, "center", Bi, "50px"], null)], null), new Y(null, 3, 5, Z, [Pi, new r(null, 2, [Ui, "btn btn-primary", Ii, function() {
