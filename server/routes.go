@@ -46,7 +46,12 @@ func Home(docroot string) gin.HandlerFunc {
 			home = LoadTemplate(docroot, "/index.html")
 		}
 
-		userId, _ := c.Get(UserId)
+		userId, err := c.Get(UserId)
+		if err != nil {
+			Fail(c.Writer, err)
+			return
+		}
+
 		home.Execute(c.Writer, Config{
 			IsProduction:       cfg.IsProduction,
 			PubNubPublishKey:   cfg.PubNubPublishKey,

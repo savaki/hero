@@ -41,12 +41,15 @@ func AuthProvider() (verify, authorize gin.HandlerFunc) {
 		defer session.Save(c.Request, c.Writer)
 
 		if session.Values[UserId] == nil {
-			log.Println("no session id, sending to oauth login")
-			c.Redirect(302, sfdc.Url("touch"))
+			location := sfdc.Url("touch")
+			log.Println("no session id, sending to oauth login =>", location)
+			c.Redirect(302, location)
+			c.Abort(302)
 			return
 		}
 
 		c.Set(UserId, session.Values[UserId])
+		c.Set(AccessToken, session.Values[AccessToken])
 
 		c.Next()
 	}
