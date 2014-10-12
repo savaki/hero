@@ -8,12 +8,18 @@
 
 (def user-id (.-Id js/Hero))
 
-(def request (atom {}))
+(def keys-state (let [publish-key (.-PubNubPublishKey js/Hero)
+                      subscribe-key (.-PubNubPublishKey js/Hero)]
+                  (println "publish-key is" publish-key)
+                  (println "subscribe-key is" subscribe-key)
+                  (atom {"pubnub-publish-key" publish-key
+                         "pubnub-subscribe-key" subscribe-key})))
 
-(def keys-state (atom {:pubnub-publish-key (.-PubNubPublishKey js/Hero)
-                       :pubnub-subscribe-key (.-PubNubPublishKey js/Hero)}))
-
+; holds status results form cors check
 (def status-state (atom {}))
+
+; holds which page we're currently on
+(def page-id-state (atom "hero-home"))
 
 (def page-ids (atom ["hero-task-feedback"
                      "hero-task-detail"
@@ -29,18 +35,26 @@
                        "show-me-how"
                        "talk-to-expert"]))
 
+; the current request we're building
+(def current-request-state (atom {:requested-by user-id
+                                  :notes []}))
+
+; our history of requests
 (def requests-state (atom []))
 
+; holds references to the pubnub singleton
 (def pubnub-state (atom nil))
 
 ; ------------------------------------------------------------------------
+; utility methods
 
-(defn log [& more]
-  (.apply (.-log js/console) js/console
-    (into-array (map #(if (satisfies? cljs.core.ISeqable %)
-                        (pr-str %)
-                        %)
-                  more))))
+(defn current-request-provider []
+  (get @current-request-state :provider))
+
+(defn page-state-class [page-id]
+  (if (= page-id @page-id-state)
+    {:class "hero-active"}
+    {}))
 
 ; ------------------------------------------------------------------------
 
@@ -53,24 +67,25 @@
                                     :message {"text" message}})))
 
 (defn pubnub-receive-request [message]
-  (log "receiving request =>" message))
+  (println "receiving request =>" message))
 
 (defn pubnub-receive-message [message]
-  (log "receiving message =>" message))
+  (println "receiving message =>" message))
 
 ; ------------------------------------------------------------------------
 
 ; hard coding logic here where a hero page is only allowed to be in two
 ; states with regards to classes, 'hero-page' and 'hero-page hero-active'
 (defn deactivate-page [id]
-  (log "deactivating page" id)
+  (println "deactivating page" id)
   (let [element (.getElementById js/document id)]
     (set! (.-className element) "hero-page")))
 
 (defn activate-page [id]
   (doseq [page-id @page-ids] (deactivate-page page-id))
   (let [element (.getElementById js/document id)]
-    (log "activating page" id)
+    (println "activating page" id)
+    (js/setTimeout #(reset! page-id-state id), 500)
     (set! (.-className element) "hero-page hero-active")
     (js/Velocity element "transition.slideRightBigIn" 400)))
 
@@ -108,13 +123,15 @@
 ; ------------------------------------------------------------------------
 
 (defn task-feedback-view []
-  [:div#hero-task-feedback.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+  [:div#hero-task-feedback.hero-page (page-state-class "hero-task-feedback")
+   [hero-header-view "Request Item" cancel-to-home blank]
    [:div "I hold feedback"]])
 
 ; ------------------------------------------------------------------------
 
 (defn task-detail-view []
-  [:div#hero-task-detail.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+  [:div#hero-task-detail.hero-page (page-state-class "hero-task-detail")
+   [hero-header-view "Request Item" cancel-to-home blank]
    [task-item "new-report"]
    [partner-item]
    [:div "and more goodness"]
@@ -123,22 +140,39 @@
 ; ------------------------------------------------------------------------
 
 (defn task-match-view []
-  [:div#hero-task-match.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+  [:div#hero-task-match.hero-page (page-state-class "hero-task-match")
+   [hero-header-view "Request Item" cancel-to-home blank]
    [task-item "new-report"]
    [partner-item]
    [:a {:on-click #(activate-page "hero-task-detail")} "accept the match"]])
 
 ; ------------------------------------------------------------------------
 
+(defn task-search-find-provider []
+  [:div.hero-find-provider [:div.hero-button {:type "button"
+                                              :on-click #(pubnub-send-request @current-request-state)} "Request Hero"]])
+
+(defn task-search-show-provider [provider]
+  [:div.hero-show-provider [:div.hero-button {:type "button"} "Request Hero"]])
+
+(defn task-search-contents []
+  (let [provider (current-request-provider)]
+    [:div.task-search-contents (if (empty? provider)
+                                 [task-search-find-provider]
+                                 [task-search-show-provider provider])]))
+
 (defn task-search-view []
-  [:div#hero-task-search.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+  [:div#hero-task-search.hero-page (page-state-class "hero-task-search")
+   [hero-header-view "Request Item" cancel-to-home blank]
    [task-item "new-report"]
-   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
+   [task-search-contents]])
+;   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
 
 ; ------------------------------------------------------------------------
 
 (defn select-task-type [task-type]
   (println "selected task type, " task-type)
+  (js/setTimeout #(swap! current-request-state assoc :task-type task-type))
   (activate-page "hero-task-search"))
 
 (defn task-select-item [task-type]
@@ -155,14 +189,15 @@
                 :on-click #(pubnub-send-request @val)}]])))
 
 (defn task-select-view []
-  [:div#hero-task-select.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+  [:div#hero-task-select.hero-page (page-state-class "hero-task-select")
+   [hero-header-view "Request Item" cancel-to-home blank]
    (for [task-type @task-types] [task-select-item task-type])])
 
 ; ------------------------------------------------------------------------
 ; newbie section
 
 (defn request-button-view []
-  [:div.hero-request-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
+  [:div.hero-button {:on-click #(activate-page "hero-task-select")} "Get Started"])
 
 (defn home-feed-first-time []
   [:div.newbie [:h1 "Worker Smarter"]
@@ -203,7 +238,7 @@
     [home-feed-default]))
 
 (defn home-view [requests]
-  [:div#hero-home.hero-page {:class "hero-active"} [home-header-view]
+  [:div#hero-home.hero-page (page-state-class "hero-home") [home-header-view]
    [request-button-view]
    [home-feed-view requests]])
 
@@ -219,15 +254,19 @@
    [task-feedback-view]])
 
 (defn app-boot []
-  (log "booting cljs app")
-  (reset! pubnub-state (.init js/PUBNUB (clj->js {:publish_key (get-in keys-state :pubnub-publish-key)
-                                                  :subscribe_key (get-in keys-state :pubnub-subscribe-key)
+  (println "initializing pubnub")
+  (reset! pubnub-state (.init js/PUBNUB (clj->js {:publish_key (get-in keys-state "pubnub-publish-key")
+                                                  :subscribe_key (get-in keys-state "pubnub-subscribe-key")
                                                   :ssl true})))
+
+  (println "subscribing to requests channel")
   (.subscribe @pubnub-state (clj->js {:channel "requests",
-                                      :connect #(log "Connected to requests channel via TLS")
+                                      :connect #(println "Connected to requests channel via TLS")
                                       :message (fn [m] (pubnub-receive-request m))}))
+
+  (println "subscribing to private channel")
   (.subscribe @pubnub-state (clj->js {:channel user-id,
-                                      :connect #(log "Connected to private channel," user-id ", via TLS")
+                                      :connect #(println "Connected to private channel," user-id ", via TLS")
                                       :message (fn [m] (pubnub-receive-message m))}))
   (ajax/GET "https://hero-master-herokuapp-com.global.ssl.fastly.net/check/cors"
     {:handler (fn [status] (reset! status-state status))}))
