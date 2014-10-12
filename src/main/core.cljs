@@ -196,7 +196,7 @@
 ; ------------------------------------------------------------------------
 
 (defn app-view []
-  (js/setTimeout #(activate-page "hero-task-select"), 50)
+;  (js/setTimeout #(activate-page "hero-task-select"), 50)
   [:div.hero-app [home-view @requests-state]
    [task-select-view]
    [task-search-view]

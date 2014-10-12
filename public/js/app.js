@@ -9397,9 +9397,6 @@ function Km() {
   }], null)], 0));
 }
 var Lm = Me(function() {
-  setTimeout(function() {
-    return tm("hero-task-select");
-  }, 50);
   return new Y(null, 7, 5, Z, [Xh, new Y(null, 2, 5, Z, [Jm, Dd(pm)], null), new Y(null, 1, 5, Z, [Em], null), new Y(null, 1, 5, Z, [Cm], null), new Y(null, 1, 5, Z, [Bm], null), new Y(null, 1, 5, Z, [Am], null), new Y(null, 1, 5, Z, [zm], null)], null);
 }, new r(null, 1, [xi, function() {
   return Km();
