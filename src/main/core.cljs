@@ -36,8 +36,10 @@
                        "talk-to-expert"]))
 
 ; the current request we're building
-(def current-request-state (atom {:requested-by user-id
-                                  :notes []}))
+; fields: requested-by, status, feed, provider
+(def current-request-state (atom {"requested-by" user-id
+                                  "status" nil
+                                  "task-type" nil}))
 
 ; our history of requests
 (def requests-state (atom []))
@@ -148,9 +150,26 @@
 
 ; ------------------------------------------------------------------------
 
+(defn clear-current-request! []
+  (swap! current-request-state "provider" nil)
+  (swap! current-request-state "task-type" nil)
+  (swap! current-request-state "status" nil)
+  (swap! current-request-state "feed" []))
+
+(defn task-search-find-provider-action []
+  (swap! current-request-state assoc "status" "submitted")
+  (println "finding a provider" @current-request-state)
+  (ajax/POST "/api/requests"
+    {:params @current-request-state
+     :format :json
+     :handler (fn [result] (println result)
+                (clear-current-request!)
+                (ajax/GET "/api/requests"
+                  {:handler (fn [entries] (reset! requests-state entries))}))}))
+
 (defn task-search-find-provider []
   [:div.hero-find-provider [:div.hero-button {:type "button"
-                                              :on-click #(pubnub-send-request @current-request-state)} "Request Hero"]])
+                                              :on-click #(task-search-find-provider-action)} "Request Hero"]])
 
 (defn task-search-show-provider [provider]
   [:div.hero-show-provider [:div.hero-button {:type "button"} "Request Hero"]])
@@ -172,7 +191,7 @@
 
 (defn select-task-type [task-type]
   (println "selected task type, " task-type)
-  (js/setTimeout #(swap! current-request-state assoc :task-type task-type))
+  (js/setTimeout #(swap! current-request-state assoc "task-type" task-type))
   (activate-page "hero-task-search"))
 
 (defn task-select-item [task-type]

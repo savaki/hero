@@ -17,10 +17,12 @@ func CreateRoutes(docroot string) *gin.Engine {
 	verify, authorize := AuthProvider()
 
 	routes := gin.New()
-	routes.Use(cors)
+	routes.Use(cors) // uncomment this if we use salesforce
 
 	routes.GET("/", verify, Home(docroot))
 	routes.GET("/salesforce/callback", authorize)
+	routes.POST("/api/requests", verify, CreateRequest)
+	routes.GET("/api/requests", verify, FindAllRequests)
 
 	routes.GET("/check/redis", CheckRedis)
 	routes.GET("/check/cors", CheckCors)
