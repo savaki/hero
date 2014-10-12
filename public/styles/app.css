@@ -158,16 +158,23 @@ body, div, p, td, th, li {
 
 .hero-header {
   padding: 22px;
-  height: 28px;
   text-align: center;
   border-bottom: 1px solid #dadee2;
 }
 
+.header-header-title {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header-header-left {
+  cursor: pointer;
   float: left;
 }
 
 .header-header-right {
+  cursor: pointer;
   float: right;
 }
 
@@ -243,3 +250,4 @@ body, div, p, td, th, li {
   padding-bottom: 7px;
   text-align: center;
 }
+

@@ -8,6 +8,8 @@
 
 (def user-id (.-Id js/Hero))
 
+(def request (atom {}))
+
 (def keys-state (atom {:pubnub-publish-key (.-PubNubPublishKey js/Hero)
                        :pubnub-subscribe-key (.-PubNubPublishKey js/Hero)}))
 
@@ -72,6 +74,10 @@
     (set! (.-className element) "hero-page hero-active")
     (js/Velocity element "transition.slideRightBigIn" 400)))
 
+
+(defn cancel-to-home []
+  [:div.hero-cancel {:on-click #(activate-page "hero-home")} "Cancel"])
+
 ; ------------------------------------------------------------------------
 ; reusable display elements
 
@@ -102,12 +108,14 @@
 ; ------------------------------------------------------------------------
 
 (defn task-feedback-view []
-  [:div#hero-task-feedback.hero-page "I hold feedback"])
+  [:div#hero-task-feedback.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+   [:div "I hold feedback"]])
 
 ; ------------------------------------------------------------------------
 
 (defn task-detail-view []
-  [:div#hero-task-detail.hero-page [task-item "new-report"]
+  [:div#hero-task-detail.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+   [task-item "new-report"]
    [partner-item]
    [:div "and more goodness"]
    [:a {:on-click #(activate-page "hero-task-feedback")} "lastly, give feedback"]])
@@ -115,20 +123,26 @@
 ; ------------------------------------------------------------------------
 
 (defn task-match-view []
-  [:div#hero-task-match.hero-page [task-item "new-report"]
+  [:div#hero-task-match.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+   [task-item "new-report"]
    [partner-item]
    [:a {:on-click #(activate-page "hero-task-detail")} "accept the match"]])
 
 ; ------------------------------------------------------------------------
 
 (defn task-search-view []
-  [:div#hero-task-search.hero-page [task-item "new-report"]
+  [:div#hero-task-search.hero-page [hero-header-view "Request Item" cancel-to-home blank]
+   [task-item "new-report"]
    [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
 
 ; ------------------------------------------------------------------------
 
+(defn select-task-type [task-type]
+  (println "selected task type, " task-type)
+  (activate-page "hero-task-search"))
+
 (defn task-select-item [task-type]
-  [:a.task-select-item {:on-click #(activate-page "hero-task-search")}
+  [:a.task-select-item {:on-click #(select-task-type task-type)}
    [task-item task-type]])
 
 (defn chat-input []
@@ -141,7 +155,7 @@
                 :on-click #(pubnub-send-request @val)}]])))
 
 (defn task-select-view []
-  [:div#hero-task-select.hero-page [hero-header-view "Request Item" noop noop]
+  [:div#hero-task-select.hero-page [hero-header-view "Request Item" cancel-to-home blank]
    (for [task-type @task-types] [task-select-item task-type])])
 
 ; ------------------------------------------------------------------------
@@ -196,7 +210,7 @@
 ; ------------------------------------------------------------------------
 
 (defn app-view []
-;  (js/setTimeout #(activate-page "hero-task-select"), 50)
+  ;  (js/setTimeout #(activate-page "hero-task-select"), 50)
   [:div.hero-app [home-view @requests-state]
    [task-select-view]
    [task-search-view]
