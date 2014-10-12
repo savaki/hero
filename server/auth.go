@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/boj/redistore"
 	"github.com/gin-gonic/gin"
+	"github.com/savaki/hero/server/dao"
 	"github.com/savaki/salesforce-oauth"
 	"log"
 	"net/url"
@@ -12,6 +13,9 @@ import (
 const (
 	CookieName  = "hero-session"
 	UserId      = "userId"
+	Name        = "name"
+	Image       = "image"
+	Phone       = "phone"
 	AccessToken = "accessToken"
 )
 
@@ -50,6 +54,9 @@ func AuthProvider() (verify, authorize gin.HandlerFunc) {
 
 		c.Set(UserId, session.Values[UserId])
 		c.Set(AccessToken, session.Values[AccessToken])
+		c.Set(Name, session.Values[Name])
+		c.Set(Image, session.Values[Image])
+		c.Set(Phone, session.Values[Phone])
 
 		c.Next()
 	}
@@ -73,6 +80,14 @@ func AuthProvider() (verify, authorize gin.HandlerFunc) {
 			if err != nil {
 				Fail(c.Writer, err)
 				return
+			}
+
+			user, _ := dao.FindUserBySfdcId(token.Id)
+			if user != nil {
+				log.Println("saving user data")
+				session.Values[Name] = user.Name
+				session.Values[Phone] = user.Phone
+				session.Values[Image] = user.Image
 			}
 
 			log.Println("saving session data")

@@ -11,6 +11,9 @@ import (
 type Config struct {
 	IsProduction       bool
 	UserId             string
+	Name               string
+	Image              string
+	Phone              string
 	PubNubPublishKey   string
 	PubNubSubscribeKey string
 	PubNubSecretKey    string

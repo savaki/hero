@@ -59,11 +59,29 @@ func Page(docroot, path string) gin.HandlerFunc {
 			return
 		}
 
+		name := ""
+		if v, err := c.Get(Name); err == nil {
+			name = v.(string)
+		}
+
+		phone := ""
+		if v, err := c.Get(Phone); err == nil {
+			phone = v.(string)
+		}
+
+		image := ""
+		if v, err := c.Get(Image); err == nil {
+			image = v.(string)
+		}
+
 		home.Execute(c.Writer, Config{
 			IsProduction:       cfg.IsProduction,
 			PubNubPublishKey:   cfg.PubNubPublishKey,
 			PubNubSubscribeKey: cfg.PubNubSubscribeKey,
 			UserId:             userId.(string),
+			Name:               name,
+			Image:              image,
+			Phone:              phone,
 		})
 	}
 }

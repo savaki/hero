@@ -58,10 +58,23 @@
    [:h1 "patiently waiting for our wits to grow sharper."]
    [:h3 "... waiting for our Hero to arrive"]])
 
+(defn offer-assistance [request]
+  (let [name (.-Name js/Hero)
+        phone (.-Phone js/Hero)
+        image (.-Image js/Hero)
+        recipient (get request "user-id")]
+    (println "sending message to " recipient)
+    (pubnub-send-request {:recipient recipient
+                          :image image
+                          :phone phone
+                          :name name
+                          :user-id user-id})))
+
 (defn home-view-waiting [requests]
   [:div.starter-template [:h1 "Someone approaches in need of help."]
    [:div {:style {:text-align "center"
-                  :margin-top "50px"}} [:div {:class "btn btn-primary"} "Offer Assistance"]]])
+                  :margin-top "50px"}} [:div {:class "btn btn-primary"
+                                              :on-click #(offer-assistance (take 1 requests))} "Offer Assistance"]]])
 
 (defn home-view-request-content [request]
   (let [request-type (get request "request-type")]

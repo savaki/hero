@@ -51,7 +51,7 @@
 ; utility methods
 
 (defn current-request-provider []
-  (get @current-request-state :provider))
+  (get @current-request-state "provider"))
 
 (defn page-state-class [page-id]
   (if (= page-id @page-id-state)
@@ -69,7 +69,17 @@
                                     :message {"text" message}})))
 
 (defn pubnub-receive-request [message]
-  (println "receiving request =>" message))
+  (let [image (get-in message ["text" "image"])
+        user-id (get-in message ["text" "user-id"])
+        name (get-in message ["text" "name"])
+        phone (get-in message ["text" "phone"])
+        provider {:name name
+                  :user-id user-id
+                  :image image
+                  :phone phone}]
+    (println "received provider" provider)
+    (swap! current-request-state assoc "status" "offered")
+    (swap! current-request-state assoc "provider" provider)))
 
 (defn pubnub-receive-message [message]
   (println "receiving message =>" message))
@@ -137,7 +147,7 @@
 
 (defn task-detail-view []
   [:div#hero-task-detail.hero-page (page-state-class "hero-task-detail")
-   [hero-header-view "Request Item" cancel-to-home blank]
+   [hero-header-view "Details" cancel-to-home blank]
    [task-item "new-report"]
    [partner-item]
    [:div "and more goodness"]
@@ -216,12 +226,24 @@
          (and (< time-remaining 12) (> time-remaining 5)) [not-looking-good]
          :else [:div.time-remaining time-remaining])])))
 
+(defn task-search-provider-offered []
+  (let [provider (current-request-provider)
+        name (get provider :name)]
+    (println provider)
+    [:div [:h2.select-task "Found a Community Member"]
+     [:p.select-task (str name "is standing by, ready to help.  Give me a call and let him know what you'd like.")]
+     [:div.provider-container {:class "clearfix"} [:div.provider-image-container [:img.provider-image {:src (get provider :image)}]]
+      [:div.provider-contact-info [:div.provider-name (get provider :name)]
+       [:a.provider-phone {:href (str "tel:" (get provider :phone))} "Call"]]]]))
+
 (defn task-search-view []
   [:div#hero-task-search.hero-page (page-state-class "hero-task-search")
-   [hero-header-view "Request Item" back-to-home blank]
+   (println "provider is" (current-request-provider))
+   (println "empty? provider is" (empty? (current-request-provider)))
+   [hero-header-view "Request" back-to-home blank]
    (cond (= (get @current-request-state "status") "submitted") [:div [task-searching-for-provider]]
      (empty? (get @current-request-state "provider")) [task-search-view-find]
-     :else [task-search-show-provider provider])])
+     :else [task-search-provider-offered])])
 
 ;   [:a {:on-click #(activate-page "hero-task-match")} "assume match"]])
 
@@ -247,7 +269,7 @@
 
 (defn task-select-view []
   [:div#hero-task-select.hero-page (page-state-class "hero-task-select")
-   [hero-header-view "Select Work Area" cancel-to-home blank]
+   [hero-header-view "Select" cancel-to-home blank]
    [:h2.select-task "I Want To ..."]
    (for [task-type @task-types] [task-select-item task-type])])
 
@@ -331,12 +353,12 @@
   (println "subscribing to requests channel")
   (.subscribe @pubnub-state (clj->js {:channel "requests",
                                       :connect #(println "Connected to requests channel via TLS")
-                                      :message (fn [m] (pubnub-receive-request m))}))
+                                      :message (fn [m] (pubnub-receive-request (js->clj m)))}))
 
   (println "subscribing to private channel")
   (.subscribe @pubnub-state (clj->js {:channel user-id,
                                       :connect #(println "Connected to private channel," user-id ", via TLS")
-                                      :message (fn [m] (pubnub-receive-message m))}))
+                                      :message (fn [m] (pubnub-receive-message (js->clj m)))}))
 
   (ajax/GET "/api/requests"
     {:handler (fn [entries] (reset! requests-state entries))}))

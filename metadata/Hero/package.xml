@@ -9,8 +9,24 @@
         <name>ApexPage</name>
     </types>
     <types>
+        <members>HeroRequest__c.RequestType__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>HeroRequest__c</members>
+        <name>CustomObject</name>
+    </types>
+    <types>
         <members>VFTab</members>
         <name>CustomTab</name>
+    </types>
+    <types>
+        <members>HeroRequest__c-Hero Request Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>HeroRequest__c.All</members>
+        <name>ListView</name>
     </types>
     <version>31.0</version>
 </Package>

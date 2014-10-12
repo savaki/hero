@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
+	"log"
 	"os"
 	"time"
 )
@@ -18,13 +19,13 @@ func Open() (*sql.DB, error) {
 }
 
 type Request struct {
-	Id           string    `json:"id"           db:"id"`
-	UserId       string    `json:"user-id"      db:"user_id"`
-	ProviderId   string    `json:"provider-id"  db:"provider_id"`
-	Status       string    `json:"status"       db:"status"`
-	RequestType *string    `json:"request-type" db:"request_type"`
-	Description *string    `json:"description"  db:"description"`
-	CreatedAt    time.Time `json:"created-at"   db:"created_at"`
+	Id          string    `json:"id"           db:"id"`
+	UserId      string    `json:"user-id"      db:"user_id"`
+	ProviderId  string    `json:"provider-id"  db:"provider_id"`
+	Status      string    `json:"status"       db:"status"`
+	RequestType *string   `json:"request-type" db:"request_type"`
+	Description *string   `json:"description"  db:"description"`
+	CreatedAt   time.Time `json:"created-at"   db:"created_at"`
 }
 
 func CreateRequest(request *Request) (string, error) {
@@ -109,4 +110,31 @@ type Rating struct {
 	Rating    int       `db:"rating"`
 	CreatedBy string    `db:"created_by"`
 	CreatedAt time.Time `db:"created_at"`
+}
+
+type User struct {
+	Id     string `db:"id"`
+	UserId string `db:"sfdc_id"`
+	Name   string `db:"name"`
+	Phone  string `db:"phone"`
+	Image  string `db:"image"`
+}
+
+func FindUserBySfdcId(sfdcId string) (*User, error) {
+	db, err := sqlx.Open("postgres", dataSourceName)
+	if err != nil {
+		log.Printf("unable to connect to db => %v\n", err)
+		return nil, err
+	}
+	defer db.Close()
+
+	user := User{}
+	err = db.Get(&user, "select id, sfdc_id, name, phone, image from users where sfdc_id = $1", sfdcId)
+	if err != nil {
+		log.Printf("get failed => %v\n", err)
+		return nil, err
+	}
+
+	log.Printf("found user %#v\n", user)
+	return &user, nil
 }
